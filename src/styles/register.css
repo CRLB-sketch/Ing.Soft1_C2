@@ -48,6 +48,15 @@
     padding: 30px;
     width: 500px;
 }
+
+.outerContainer2 {
+    background-color: var(--blanco);
+    border-radius: 30px;
+    height: 700px;
+    overflow-y: scroll;
+    padding: 30px;
+    width: 500px;
+}
 .innerContainer {
     padding: 10px;
 }
@@ -64,11 +73,28 @@
     padding: 10px;
     text-Align: center;
 }
+
+.title2 {
+    padding: 5px;
+    text-Align: center;
+}
+
 .titleContainer {
     margin-bottom: 20px;  
     width: 100%;
 }
+
+.titleContainer2 {
+    margin-bottom: 2px;  
+    width: 100%;
+}
 .infoContainer {
+    height: auto;  
+    width: 100%;
+    
+}
+
+.infoContainer2 {
     height: auto;  
     width: 100%;
     
