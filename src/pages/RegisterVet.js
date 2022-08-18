@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import InputComponent from './components/InputComponent'
 import { Heading, Button } from '@chakra-ui/react'
-import '../styles/register.css'
+import '../styles/form.css'
 
 let user_type = 'vet'
 
@@ -78,10 +78,10 @@ const RegisterVet = () => {
 
     return (
         <div className="provisionalBackgorund">
-            <div className="outerContainer2 container">
-                <div className="infoContainer2">
-                    <div className="titleContainer2">
-                        <Heading className="title2">Formulario de registro</Heading>
+            <div className="outerContainer container">
+                <div className="infoContainer">
+                    <div className="titleContainer">
+                        <Heading className="title">Formulario de registro</Heading>
                     </div>
                     <form onSubmit={handleSubmit}>
                         <InputComponent

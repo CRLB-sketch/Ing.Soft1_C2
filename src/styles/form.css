@@ -10,8 +10,6 @@
     --blanco: #fff;
 }
 
-
-
 .questionCont {
     width: 100%;
     height: auto;
@@ -43,10 +41,11 @@
 .outerContainer {
     background-color: var(--blanco);
     border-radius: 30px;
-    height: 495px;
+    height: 950px;
+    width: 900px;
     overflow-y: scroll;
     padding: 30px;
-    width: 500px;
+    
 }
 .innerContainer {
     padding: 10px;
@@ -72,4 +71,44 @@
     height: auto;  
     width: 100%;
     
+}
+
+@media (max-width: 870px) {
+    .outerContainer{
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 390px) {
+    .outerContainer{
+        max-width: 300px;
+        max-height: 500px;
+    }
+}
+
+@media (max-width: 370px) {
+    .outerContainer{
+        max-width: 200px;
+        max-height: 2000px;
+    }
+}
+
+@media (max-width: 540px) {
+    .outerContainer{
+        max-width: 400px;
+        max-height: 500px;
+    }
+}
+
+@media (max-width: 539px) {
+    .outerContainer{
+        max-width: 400px;
+        max-height: 800px;
+    }
+}
+@media (max-width: 450px) {
+    .outerContainer{
+        max-width: 400px;
+        max-height: 700px;
+    }
 }
