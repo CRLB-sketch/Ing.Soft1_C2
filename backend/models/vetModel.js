@@ -1,15 +1,39 @@
 const mongoose = require('mongoose')
 
-const vetSchema = mongoose.Schema(
-  {
-    text: {
-        type: String,
-        required: [true, 'Please add a text value'],
-    },
+const vetSchema = mongoose.Schema({
+  name: {
+    type: String,
   },
-  {
-    timestamps: true,
+  direction: {
+    type: Object,
   },
-)
+  email: {
+    type: String,
+  },
+  services: {
+    type: Array,
+  },
+  long: {
+    type: Number,
+  },
+  lat: {
+    type: Number,
+  },
+  phone: {
+    type: String,
+  },
+  emergency: {
+    type: Boolean,
+  },
+  open_time: {
+    type: String,
+  },
+  close_time: {
+    type: String,
+  },
+  verified: {
+    type: Boolean,
+  },
+})
 
 module.exports = mongoose.model('Vet', vetSchema)
