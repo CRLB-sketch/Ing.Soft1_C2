@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import InputComponent from './components/InputComponent'
-import { Heading, Button } from '@chakra-ui/react'
+import { Heading, Button, CheckboxGroup, Checkbox, Stack, NumberInput, Radio, RadioGroup, FormControl, Select, Input, Text, FormLabel } from '@chakra-ui/react'
 import '../styles/form.css'
 
 const RegisterVet = () => {
@@ -19,47 +19,55 @@ const RegisterVet = () => {
     const [cierre, setCierre] = useState('')
     
 
-    const handleAddVet = () => {
-        fetch('http://127.0.0.1:8000/api/vets', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                nombre: nombre,
-                ciudad: ciudad,
-                zona: zona,
-                direccion: direccion,
-                correo: correo,
-                servicios: servicios,
-                latitud: latitud,
-                longitud: longitud,
-                telefono: telefono,
-                emergencia: emergencia,
-                tipo: tipo,
-                apertura: apertura,
-                cierre: cierre,
-                verified: false,
-            }),
-
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                if (result.success) {
-                    alert('Se agrego el user')
-                } else {
-                    alert('Error con la solicitud')
-                }
-            }).catch((error) => {
-                alert('Ocurrio un error inesperado: ' + error)
-            }).then(() => {
-                window.location.href = '/'
-            })
-    }
-
-    const handleSubmit = (event) => {
+    const handleAddVet = (event) => {
         event.preventDefault()
-        
+        console.log(nombre)
+        console.log({"city ": ciudad, "zone": zona, "address": direccion})
+        console.log(ciudad)
+        console.log(zona)
+        console.log(direccion)
+        console.log(correo)
+        console.log(servicios)
+        console.log(latitud)
+        console.log(longitud)
+        console.log(telefono)
+        console.log(emergencia)
+        console.log(tipo)
+        console.log(apertura)
+        console.log(cierre)
+        // fetch('http://127.0.0.1:8000/api/vets', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         name: nombre,
+        //         direction: {city : ciudad, zone : zona, address : direccion},
+        //         email: correo,
+        //         services: servicios,
+        //         lat: latitud,
+        //         long: longitud,
+        //         phone: telefono,
+        //         emergency: emergencia,
+        //         vet_type: tipo,
+        //         open_time: apertura,
+        //         close_time: cierre,
+        //         verified: false,
+        //     }),
+
+        // })
+        //     .then((response) => response.json())
+        //     .then((result) => {
+        //         if (result.success === true) {
+        //             alert('Se agrego el user')
+        //         } else {
+        //             alert('Error con la solicitud')
+        //         }
+        //     }).catch((error) => {
+        //         alert('Ocurrio un error inesperado: ' + error)
+        //     }).then(() => {
+        //         window.location.href = '/'
+        //     })
     }
 
     const getNombre = (name) => {
@@ -114,6 +122,9 @@ const RegisterVet = () => {
         setCierre(cierre)
     }
 
+    const handleChange = (event) => setCierre(event.target.value)
+    const handleChange2 = (event) => setApertura(event.target.value)
+
     return (
         <div className="provisionalBackgorund">
             <div className="outerContainer container">
@@ -121,7 +132,7 @@ const RegisterVet = () => {
                     <div className="titleContainer">
                         <Heading className="title">Formulario para registrar una veterinaria</Heading>
                     </div>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleAddVet}>
                         <InputComponent
                             getter={getNombre}
                             title="Nombre"
@@ -151,23 +162,40 @@ const RegisterVet = () => {
                             message="Ingresa tu correo"
                         />
 
-                        <InputComponent
-                            getter={getServicios}
-                            title="Servicios"
-                            message="Ingresa los servicios que ofreces"
-                        />
+                        <FormLabel>Servicios ofrecidos</FormLabel>
+                        <CheckboxGroup colorScheme='orange' defaultValue={['none']}>
+                        <Stack spacing={[1, 5]} direction={['column', 'row']}>
+                            <Checkbox value='Vacunacion' onChange={(e) => setServicios([e.target.checked, servicios[0]])}>Vacunacion</Checkbox>
+                            <Checkbox value='Rayos X' onChange={(e) => setServicios([e.target.checked, servicios[1]])}>Rayos X</Checkbox>
+                            <Checkbox value='Examenes corporales' onChange={(e) => setServicios([e.target.checked], servicios[2])}>Examenes corporales</Checkbox>
+                            <Checkbox value='Hematologías'onChange={(e) => setServicios([e.target.checked], servicios[3])}>Hematologías</Checkbox>
+                        </Stack>
+                        </CheckboxGroup>
+
+                        <br></br>
+
+                        <CheckboxGroup colorScheme='orange ' defaultValue={['none']}>
+                        <Stack spacing={[1, 5]} direction={['column', 'row']}>
+                            <Checkbox value='Operaciones' onChange={(e) => setServicios([e.target.checked, servicios[4]])}>Operaciones</Checkbox>
+                            <Checkbox value='Estetica y Grooming' onChange={(e) => setServicios([e.target.checked, servicios[5]])}>Estetica y Grooming</Checkbox>
+                            <Checkbox value='Farmacia' onChange={(e) => setServicios([e.target.checked, servicios[6]])}>Farmacia</Checkbox>
+                            <Checkbox value='Curaciónes' onChange={(e) => setServicios([e.target.checked, servicios[7]])}>Curaciónes</Checkbox>
+                        </Stack>
+                        </CheckboxGroup>
+                        
 
                         <InputComponent
                             getter={getLatitud}
                             title="Latitud"
-                            message="Ingresa la latitud de tu veterinaria"
+                            message="Ingresa el teléfono de tu veterinaria"
                         />
 
                         <InputComponent
                             getter={getLongitud}
                             title="Longitud"
-                            message="Ingresa la longitud de tu veterinaria"
+                            message="Ingresa el teléfono de tu veterinaria"
                         />
+
 
                         <InputComponent
                             getter={getTelefono}
@@ -175,28 +203,44 @@ const RegisterVet = () => {
                             message="Ingresa el teléfono de tu veterinaria"
                         />
 
-                        <InputComponent
-                            getter={getEmergencia}
-                            title="Emergencia"
-                            message="Atiendes emergencias 24H?"
+                        <FormLabel>Emergencia</FormLabel>
+                        <RadioGroup onChange={setEmergencia} value={emergencia}>
+                            <Stack direction='row'>
+                                <Radio value='true'>Si</Radio>
+                                <Radio value='false'>No</Radio>
+                            </Stack>
+                        </RadioGroup>
+
+                        <FormControl>
+                                <FormLabel>Tipo de veterinaria</FormLabel>
+                                <Select
+                                    focusBorderColor={'rgb(174 213 142)'}
+                                    
+                                >
+                                    <option value="Nada">{'Cualquiera'}</option>
+                                    <option value="Normal">{'Normal'}</option>
+                                    <option value="Petshop">{'Petshop'}</option>
+                                    <option value="Clinica">{'Clinica'}</option>
+                                    <option value="Hospital">
+                                        {'Hospital'}
+                                    </option>
+                                </Select>
+                            </FormControl>
+
+                        <FormLabel>Hora de apertura</FormLabel>
+                        <Input
+                            onChange={handleChange2}
+                            title="Hora de apertura"
+                            size="md"
+                            type="time"
                         />
 
-                        <InputComponent
-                            getter={getTipo}
-                            title="Tipo"
-                            message="Ingresa el tipo de veterinaria (Tienda, Clinica, Hospital)"
-                        />
-
-                        <InputComponent
-                            getter={getApertura}
-                            title="Apertura"
-                            message="Ingresa la hora de apertura"
-                        />
-
-                        <InputComponent
-                            getter={getCierre}
-                            title="Cierre"
-                            message="Ingresa la hora de cierre"
+                        <FormLabel>Hora de cierre</FormLabel>
+                        <Input
+                            onChange={handleChange}
+                            title="Hora de cierre"
+                            size="md"
+                            type="time"
                         />
 
                         <Button

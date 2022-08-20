@@ -77,7 +77,7 @@ const setVetinfo = asyncHandler(async (req, res) => {
     verified: false,
   })
 
-  res.status(200).json(vet)
+  res.status(200).json({ success: true})
 })
 
 // @desc    Update vet info
