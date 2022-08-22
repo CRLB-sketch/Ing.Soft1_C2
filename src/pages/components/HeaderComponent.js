@@ -33,7 +33,7 @@ function HeaderComponent({ setCurrentPage }) {
                         <Link to={'/emergency'}>Emergencia</Link>
                     </li>
 
-                    <li className="option btn">
+                    <li className="option btn" data-testid="search">
                         <Link to={'/search'}>Búsqueda</Link>
                     </li>
 
