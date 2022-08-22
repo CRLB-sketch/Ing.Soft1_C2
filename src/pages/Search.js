@@ -25,6 +25,8 @@ function Search() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [selectedVet, setSelectedVet] = useState({})
   const [seePopup, setSeePopup] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage, setPostsPerPage] = useState(9)
 
   const [value, setValue] = useState('')
   const handleChange = (event) => setValue(event.target.value)
@@ -32,6 +34,10 @@ function Search() {
   useEffect(() => {
     getVets()
   }, [])
+
+  const idxOfLastPost = currentPage * postsPerPage
+  const idxOfFirstPost = idxOfLastPost - postsPerPage
+  const currentPosts = posts.slice(idxOfFirstPost, idxOfLastPost)
 
   const styles = {
     modalBtn: {
@@ -51,6 +57,7 @@ function Search() {
         if (!data['success']) {
           alert(data['error'])
         } else {
+          console.log(data)
           setPosts(data['data'])
         }
     })()
@@ -258,7 +265,7 @@ function Search() {
           </div>
 
           <div className="CardsContainer">
-            {posts.map((vet) => {
+            {currentPosts.map((vet) => {
               return (
                 <div>
                   <CardComponent
