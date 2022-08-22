@@ -10,10 +10,18 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
+    "colors": "^1.4.0",
     "cors": "^2.8.5",
+<<<<<<< HEAD
     "framer-motion": "^6.3.6",
+=======
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+>>>>>>> cc8f46d51ca9b43b2add69ecedc5b697f3e02b5b
     "leaflet": "^1.8.0",
     "maplibre-gl": "^2.1.9",
+    "mongoose": "^6.5.2",
     "pg": "^8.7.3",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
@@ -29,7 +37,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node src/Backend.js"
+    "server": "node backend/server.js",
+    "db": "nodemon backend/server.js"
   },
   "eslintConfig": {
     "extends": [
@@ -48,5 +57,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }

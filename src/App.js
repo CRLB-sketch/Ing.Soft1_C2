@@ -6,7 +6,8 @@ import Emergency from "./pages/Emergency";
 import Login from "./pages/Login";
 import Popup from "./pages/Popup";
 import Search from "./pages/Search";
-import Register from "./pages/Register"
+import Register from "./pages/Register";
+import RegisterVet from "./pages/RegisterVet"
 import HeaderComponent from "./pages/components/HeaderComponent";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route path='/login' element={<> <Login/>  </>}></Route>
       <Route path='/register' element={<>  <Register/>  </>}></Route>
       <Route path='/Popup' element={<>  <Popup/>  </>}></Route>
+      <Route path='/RegisterVet' element={<>  <RegisterVet/>  </>}></Route>
     </Routes>
   );
 }

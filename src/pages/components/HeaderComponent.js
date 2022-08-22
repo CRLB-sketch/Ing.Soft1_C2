@@ -40,6 +40,10 @@ function HeaderComponent({ setCurrentPage }) {
                     <li className="option btn">
                         <Link to={'/login'}>Iniciar sesión</Link>
                     </li>
+
+                    <li className="option btn">
+                        <Link to={'/RegisterVet'}>Formulario</Link>
+                    </li>
                 </ul>
             </nav>
         </>

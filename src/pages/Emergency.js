@@ -59,13 +59,35 @@ const Emergency = () => {
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           ></meta>
+<<<<<<< HEAD
           <div
             className={
               selectedVet['name'] !== 'N/A' ? 'mapNpopDiv' : 'mapNpopDiv2'
+=======
+
+          {selectedVet['name'] !== 'N/A' && (
+            <div class="displayInfo">
+              <h2>Emergencia</h2>
+              <div class="vetInfo">
+                <h4>Veterinaria: {selectedVet['name']}</h4>
+                <h4>Dirección: {selectedVet['direction']['city']}</h4>
+                <h4>Número de teléfono: {selectedVet['phone']}</h4>
+              </div>
+              <button class="emBtn" onClick={() => setSeePopup(true)}>
+                Ver Más Detalles
+              </button>
+            </div>
+          )}
+
+          <div
+            className={
+              selectedVet['name'] !== 'N/A' ? 'displayMap' : 'displayMap-ext'
+>>>>>>> cc8f46d51ca9b43b2add69ecedc5b697f3e02b5b
             }
           >
             <div
               className={
+<<<<<<< HEAD
                 selectedVet['name'] !== 'N/A' ? 'mapNpopWrap' : 'mapNpopWrap2'
               }
             >
@@ -121,6 +143,17 @@ const Emergency = () => {
                   )}
                 </div>
               </div>
+=======
+                selectedVet['name'] !== 'N/A'
+                  ? 'map-container'
+                  : 'map-container-ext'
+              }
+            >
+              {!loaded && <h1>Cargando...</h1>}
+              {loaded && (
+                <MapComponent vets={vets} setSelectedVet={setSelectedVet} />
+              )}
+>>>>>>> cc8f46d51ca9b43b2add69ecedc5b697f3e02b5b
             </div>
           </div>
         </>

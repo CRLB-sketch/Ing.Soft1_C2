@@ -12,6 +12,11 @@ const centerPosition = [14.6050635, -90.4893286]
 
 const MapComponent = ({ vets, setSelectedVet }) => {
   const AddVet = ({ vet }) => {
+<<<<<<< HEAD
+=======
+    console.log('SEE ADD VET')
+    console.log(vet)
+>>>>>>> cc8f46d51ca9b43b2add69ecedc5b697f3e02b5b
     const positions = [vet['long'], vet['lat']]
 
     const handle = () => {
