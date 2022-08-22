@@ -44,7 +44,7 @@ const RegisterVet = () => {
                 name: nombre,
                 direction: {city : ciudad, zone : zona, address : direccion},
                 email: correo,
-                services: ["Corte", "Peluqueria", "Peluqueria y Corte", "Peluqueria y Corte y Tratamiento"],
+                services: servicios,
                 lat: latitud,
                 long: longitud,
                 phone: telefono,
@@ -188,13 +188,13 @@ const RegisterVet = () => {
                         <InputComponent
                             getter={getLatitud}
                             title="Latitud"
-                            message="Ingresa el teléfono de tu veterinaria"
+                            message="Ingresa la coordenada de latitud de tu veterinaria"
                         />
 
                         <InputComponent
                             getter={getLongitud}
                             title="Longitud"
-                            message="Ingresa el teléfono de tu veterinaria"
+                            message="Ingresa la coordenada de longitud de tu veterinaria"
                         />
 
 
@@ -234,6 +234,7 @@ const RegisterVet = () => {
                             title="Hora de apertura"
                             size="md"
                             type="time"
+                            focusBorderColor={'rgb(174 213 142)'}
                         />
 
                         <FormLabel>Hora de cierre</FormLabel>
@@ -242,6 +243,7 @@ const RegisterVet = () => {
                             title="Hora de cierre"
                             size="md"
                             type="time"
+                            focusBorderColor={'rgb(174 213 142)'}
                         />
 
                         <Button
