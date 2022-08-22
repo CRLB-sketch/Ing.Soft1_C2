@@ -16,8 +16,4 @@ describe('Search app component testings', () => {
         const displayedVetInfo = screen.getAllByRole("option")
         expect(displayedVetInfo.length).toBeGreaterThan(1)
     })
-
-
-
-
 });
