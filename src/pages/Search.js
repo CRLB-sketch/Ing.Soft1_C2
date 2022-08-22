@@ -27,7 +27,7 @@ function Search() {
   const [selectedVet, setSelectedVet] = useState({})
   const [seePopup, setSeePopup] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage, setPostsPerPage] = useState(9)
+  const [postsPerPage] = useState(9)
 
   const [value, setValue] = useState('')
   const handleChange = (event) => setValue(event.target.value)
@@ -52,6 +52,9 @@ function Search() {
       alignItems: 'center',
       fontSize: '17px',
     },
+    pagination: {
+      listStyle: 'none'
+    }
   }
 
   const getVets = () => {
@@ -281,7 +284,7 @@ function Search() {
               )
             })}
           </div>
-          <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
+          <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} />
         </div>
       </div>
     )

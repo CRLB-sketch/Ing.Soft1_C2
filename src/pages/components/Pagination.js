@@ -1,4 +1,6 @@
 import React from 'react'
+import { Button } from '@chakra-ui/react'
+
 
 function Pagination({ postsPerPage, totalPosts, paginate}) {
     const pageNumbers = []
@@ -7,15 +9,20 @@ function Pagination({ postsPerPage, totalPosts, paginate}) {
         pageNumbers.push(i)
     }
 
+    const styles = {
+        pagination: {
+          listStyle: 'none',
+          display: 'flex'
+        }
+      }
+
   return (
     <nav>
-        <ul className='pagination'>
+        <ul style={styles.pagination}>
             {pageNumbers.map(number => (
-                <li key={number}>  
-                  <a onClick={() => paginate(number)}>
+                <Button colorScheme='teal' variant='outline' size='sm' onClick={() => paginate(number)}>
                     {number}
-                  </a>
-                </li>
+                </Button>
             ))}
         </ul>
     </nav>
