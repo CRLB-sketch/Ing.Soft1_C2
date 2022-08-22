@@ -260,12 +260,14 @@ const RegisterVet = () => {
               <InputComponent
                 getter={getLatitud}
                 title="Latitud"
+                type="number"
                 message="Ingresa el teléfono de tu veterinaria"
               />
   
               <InputComponent
                 getter={getLongitud}
                 title="Longitud"
+                type="double"
                 message="Ingresa el teléfono de tu veterinaria"
               />
   

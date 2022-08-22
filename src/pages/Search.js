@@ -1,5 +1,7 @@
+
 import React, { useState, useEffect } from 'react'
 import CardComponent from './components/CardComponent'
+import Pagination from './components/Pagination'
 import Popup from './Popup'
 import '../styles/search.css'
 
@@ -24,6 +26,8 @@ function Search() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [selectedVet, setSelectedVet] = useState({})
   const [seePopup, setSeePopup] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage] = useState(9)
 
   const [value, setValue] = useState('')
   const handleChange = (event) => setValue(event.target.value)
@@ -31,6 +35,12 @@ function Search() {
   useEffect(() => {
     getVets()
   }, [])
+
+  const idxOfLastPost = currentPage * postsPerPage
+  const idxOfFirstPost = idxOfLastPost - postsPerPage
+  const currentPosts = posts.slice(idxOfFirstPost, idxOfLastPost)
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   const styles = {
     modalBtn: {
@@ -42,6 +52,9 @@ function Search() {
       alignItems: 'center',
       fontSize: '17px',
     },
+    pagination: {
+      listStyle: 'none'
+    }
   }
 
   const getVets = () => {
@@ -50,6 +63,7 @@ function Search() {
         if (!data['success']) {
           alert(data['error'])
         } else {
+          console.log(data)
           setPosts(data['data'])
         }
     })()
@@ -257,7 +271,7 @@ function Search() {
           </div>
 
           <div className="CardsContainer">
-            {posts.map((vet) => {
+            {currentPosts.map((vet) => {
               return (
                 <div>
                   <CardComponent
@@ -270,6 +284,7 @@ function Search() {
               )
             })}
           </div>
+          <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} />
         </div>
       </div>
     )

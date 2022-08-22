@@ -16,7 +16,6 @@ const MapComponent = ({ vets, setSelectedVet }) => {
   
   const LocationMarker = () => {
     const [position, setPosition] = useState(null)
-    // const [coords, setCoords] = useState([])
 
     const map = useMap()
 
@@ -27,7 +26,6 @@ const MapComponent = ({ vets, setSelectedVet }) => {
         const radius = e.accuracy;
         const circle = L.circle(e.latlng, radius);
         circle.addTo(map);
-        // setCoords(e.bounds.toBBoxString().split(","));
       });
     }, [map])
     
