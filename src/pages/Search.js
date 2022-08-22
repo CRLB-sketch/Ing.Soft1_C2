@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react'
 import CardComponent from './components/CardComponent'
+import Pagination from './components/Pagination'
 import Popup from './Popup'
 import '../styles/search.css'
 
@@ -38,6 +39,8 @@ function Search() {
   const idxOfLastPost = currentPage * postsPerPage
   const idxOfFirstPost = idxOfLastPost - postsPerPage
   const currentPosts = posts.slice(idxOfFirstPost, idxOfLastPost)
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   const styles = {
     modalBtn: {
@@ -278,6 +281,7 @@ function Search() {
               )
             })}
           </div>
+          <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
         </div>
       </div>
     )
