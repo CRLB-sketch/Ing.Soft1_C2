@@ -21,53 +21,53 @@ const RegisterVet = () => {
 
     const handleAddVet = (event) => {
         event.preventDefault()
-        console.log(nombre)
-        console.log({"city ": ciudad, "zone": zona, "address": direccion})
-        console.log(ciudad)
-        console.log(zona)
-        console.log(direccion)
-        console.log(correo)
-        console.log(servicios)
-        console.log(latitud)
-        console.log(longitud)
-        console.log(telefono)
-        console.log(emergencia)
-        console.log(tipo)
-        console.log(apertura)
-        console.log(cierre)
-        // fetch('http://127.0.0.1:8000/api/vets', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         name: nombre,
-        //         direction: {city : ciudad, zone : zona, address : direccion},
-        //         email: correo,
-        //         services: servicios,
-        //         lat: latitud,
-        //         long: longitud,
-        //         phone: telefono,
-        //         emergency: emergencia,
-        //         vet_type: tipo,
-        //         open_time: apertura,
-        //         close_time: cierre,
-        //         verified: false,
-        //     }),
+        // console.log(nombre)
+        // console.log({"city ": ciudad, "zone": zona, "address": direccion})
+        // console.log(ciudad)
+        // console.log(zona)
+        // console.log(direccion)
+        // console.log(correo)
+        // console.log(servicios)
+        // console.log(latitud)
+        // console.log(longitud)
+        // console.log(telefono)
+        // console.log(emergencia)
+        // console.log(tipo)
+        // console.log(apertura)
+        // console.log(cierre)
+        fetch('http://127.0.0.1:8000/api/vets', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: nombre,
+                direction: {city : ciudad, zone : zona, address : direccion},
+                email: correo,
+                services: ["Corte", "Peluqueria", "Peluqueria y Corte", "Peluqueria y Corte y Tratamiento"],
+                lat: latitud,
+                long: longitud,
+                phone: telefono,
+                emergency: emergencia,
+                vet_type: tipo,
+                open_time: apertura,
+                close_time: cierre,
+                verified: false,
+            }),
 
-        // })
-        //     .then((response) => response.json())
-        //     .then((result) => {
-        //         if (result.success === true) {
-        //             alert('Se agrego el user')
-        //         } else {
-        //             alert('Error con la solicitud')
-        //         }
-        //     }).catch((error) => {
-        //         alert('Ocurrio un error inesperado: ' + error)
-        //     }).then(() => {
-        //         window.location.href = '/'
-        //     })
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.success === true) {
+                    alert('Se agrego el user')
+                } else {
+                    alert('Error con la solicitud')
+                }
+            }).catch((error) => {
+                alert('Ocurrio un error inesperado: ' + error)
+            }).then(() => {
+                window.location.href = '/'
+            })
     }
 
     const getNombre = (name) => {
@@ -165,14 +165,15 @@ const RegisterVet = () => {
                         <FormLabel>Servicios ofrecidos</FormLabel>
                         <CheckboxGroup colorScheme='orange' defaultValue={['none']}>
                         <Stack spacing={[1, 5]} direction={['column', 'row']}>
-                            <Checkbox value='Vacunacion' onChange={(e) => setServicios([e.target.checked, servicios[0]])}>Vacunacion</Checkbox>
-                            <Checkbox value='Rayos X' onChange={(e) => setServicios([e.target.checked, servicios[1]])}>Rayos X</Checkbox>
+                            <Checkbox value='Vacunacion' onChange={(e) => setServicios([...servicios, e.target.checked ])}>Vacunacion</Checkbox>
+                            
+                            {/* <Checkbox value='Rayos X' onChange={(e) => setServicios([e.target.checked, servicios[1]])}>Rayos X</Checkbox>
                             <Checkbox value='Examenes corporales' onChange={(e) => setServicios([e.target.checked], servicios[2])}>Examenes corporales</Checkbox>
-                            <Checkbox value='Hematologías'onChange={(e) => setServicios([e.target.checked], servicios[3])}>Hematologías</Checkbox>
+                            <Checkbox value='Hematologías'onChange={(e) => setServicios([e.target.checked], servicios[3])}>Hematologías</Checkbox> */}
                         </Stack>
                         </CheckboxGroup>
 
-                        <br></br>
+                        {/* <br></br>
 
                         <CheckboxGroup colorScheme='orange ' defaultValue={['none']}>
                         <Stack spacing={[1, 5]} direction={['column', 'row']}>
@@ -181,7 +182,7 @@ const RegisterVet = () => {
                             <Checkbox value='Farmacia' onChange={(e) => setServicios([e.target.checked, servicios[6]])}>Farmacia</Checkbox>
                             <Checkbox value='Curaciónes' onChange={(e) => setServicios([e.target.checked, servicios[7]])}>Curaciónes</Checkbox>
                         </Stack>
-                        </CheckboxGroup>
+                        </CheckboxGroup> */}
                         
 
                         <InputComponent
