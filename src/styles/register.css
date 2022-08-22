@@ -48,8 +48,23 @@
     padding: 30px;
     width: 500px;
 }
+
+.faqCont {
+    background-color: var(--blanco);
+    border-radius: 30px;
+    height: 90%;
+    overflow-y: scroll;
+    padding: 30px;
+    width: 90%;
+}
+
 .innerContainer {
     padding: 10px;
+}
+
+.innerContainer h1{
+    font-size: 1.5em;
+    font-weight: 500;
 }
 
 .provisionalBackgorund {
