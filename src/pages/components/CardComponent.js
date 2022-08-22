@@ -19,7 +19,7 @@ const CardComponent = ({ vet, image, setSeePopup, setSelectedVet }) => {
                     src={image}
                     alt="Foto Veterinaria"
                 />
-                <a className="nombresS">
+                <a>
                     <b>{vet['name']}</b>
                 </a>
             </Stack>
