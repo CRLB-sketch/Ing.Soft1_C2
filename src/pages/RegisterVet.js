@@ -41,7 +41,7 @@ const RegisterVet = () => {
             services.push(key)
         }
     }
-    console.log("VERIFICAR: " + services.length)
+    
     if(services.length === 0){
         alert("Porfavor ingrese como mínimo un servicio")
         return
