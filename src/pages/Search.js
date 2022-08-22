@@ -1,18 +1,3 @@
-/**#######################################################################################
- * Universidad del Valle de Guatemala
- * Departamento de Ciencias de la Computación
- * Ingeniería de Software 1 - Sección 10
- * 
- * Me Pet & Me
- * ! Search: Para buscar las veterinarias que el usuario solicita
- * 
- * Integrantes:
- * Cristian Laynez
- * Elean Rivas
- * Sara Paguaga
- * Diego Ruiz
- * Javier Alvarez
- #######################################################################################*/
 
 import React, { useState, useEffect } from 'react'
 import CardComponent from './components/CardComponent'
@@ -32,6 +17,8 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from '@chakra-ui/react'
+
+import GetVets from './functions/GetVets'
 
 function Search() {
   const [posts, setPosts] = useState([])
@@ -59,56 +46,53 @@ function Search() {
   }
 
   const getVets = () => {
-    fetch('http://127.0.0.1:8000/start_search', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        emergency: true,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setPosts(data)
-      })
+    ;(async () => {
+        const data = await GetVets()
+        if (!data['success']) {
+          alert(data['error'])
+        } else {
+          setPosts(data['data'])
+        }
+    })()
   }
 
   const filterVet = () => {
-    fetch('http://127.0.0.1:8000/name_filter', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        search_vet: value,
-      }),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        console.log('VERIFICAR: ' + result.data)
-        setPosts(result.data)
-      })
+    alert("FILTER VET :)")
+    // fetch('http://127.0.0.1:8000/name_filter', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     search_vet: value,
+    //   }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     console.log('VERIFICAR: ' + result.data)
+    //     setPosts(result.data)
+    //   })
   }
 
   const updateData = (the_emergency, the_vet, selected_service, the_time) => {
-    fetch('http://127.0.0.1:8000/apply_changues', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        emergency: the_emergency,
-        vet_type: the_vet,
-        selected_service: selected_service,
-        time: the_time,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('VERIFICAR: ' + data)
-        setPosts(data)
-      })
+    alert("UPDATE DATA")
+    // fetch('http://127.0.0.1:8000/apply_changues', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     emergency: the_emergency,
+    //     vet_type: the_vet,
+    //     selected_service: selected_service,
+    //     time: the_time,
+    //   }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log('VERIFICAR: ' + data)
+    //     setPosts(data)
+    //   })
   }
 
   class FilterFrom extends React.Component {
@@ -319,7 +303,7 @@ function Search() {
               &#x1F50D;{' '}
             </Button>
           </div>
-        </>
+        </> 
       )}
       {!seePopup && <SeeSearch />}
       {seePopup && <Popup vet={selectedVet} regretOriginal={setSeePopup} />}
