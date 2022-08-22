@@ -17,6 +17,8 @@ import {
 } from '@chakra-ui/react'
 import '../styles/form.css'
 
+import HeaderComponent from './components/HeaderComponent'
+
 const RegisterVet = () => {
   const [nombre, setNombre] = useState('')
   const [ciudad, setCiudad] = useState('')
@@ -135,205 +137,208 @@ const RegisterVet = () => {
   const handleChange2 = (event) => setApertura(event.target.value)
 
   return (
-    <div className="provisionalBackgorund">
-      <div className="outerContainer container">
-        <div className="infoContainer">
-          <div className="titleContainer">
-            <Heading className="title">
-              Formulario para registrar una veterinaria
-            </Heading>
-          </div>
-          <form onSubmit={handleAddVet}>
-            <InputComponent
-              getter={getNombre}
-              title="Nombre"
-              message="Ingresa el nombre del veterinario"
-            />
-            <InputComponent
-              getter={getCiudad}
-              title="Ciudad"
-              message="Ingresa la ciudad de tu veterinaria"
-            />
-
-            <InputComponent
-              getter={getZona}
-              title="Zona"
-              message="Ingresa la zona de tu veterinaria"
-            />
-
-            <InputComponent
-              getter={getDireccion}
-              title="Dirección"
-              message="Ingresa la dirección de tu veterinaria"
-            />
-
-            <InputComponent
-              getter={getCorreo}
-              title="Correo"
-              message="Ingresa tu correo"
-            />
-
-            <FormLabel>Servicios ofrecidos</FormLabel>
-            <CheckboxGroup colorScheme="orange" defaultValue={['none']}>
-              <Stack spacing={[2, 3]} direction={['column']}>
-                <Checkbox
-                  value="Vacunacion"
-                  onChange={(e) =>
-                    setDicServices(prevTest => ({...prevTest, vacunacion: e.target.checked}))
-                  }
-                >
-                  Vacunacion
-                </Checkbox>
-                <Checkbox
-                  value="Rayos X"
-                  onChange={(e) =>
-                    setDicServices(prevTest => ({...prevTest, rayos_x: e.target.checked}))
-                  }
-                >
-                  Rayos X
-                </Checkbox>
-                <Checkbox
-                  value="Examenes corporales"
-                  onChange={(e) =>
-                    setDicServices(prevTest => ({...prevTest, examenes_corporales: e.target.checked}))
-                  }
-                >
-                  Examenes corporales
-                </Checkbox>
-                <Checkbox
-                  value="Hematologías"
-                  onChange={(e) =>
-                    setDicServices(prevTest => ({...prevTest, hematologias: e.target.checked}))
-                  }
-                >
-                  Hematologías
-                </Checkbox>
-                <Checkbox
-                  value="Hospedaje"
-                  onChange={(e) =>
-                    setDicServices(prevTest => ({...prevTest, hospedaje: e.target.checked}))
-                  }
-                >
-                  Hospedaje
-                </Checkbox>
-                <Checkbox
-                  value="Grooming"
-                  onChange={(e) =>
-                    setDicServices(prevTest => ({...prevTest, grooming: e.target.checked}))
-                  }
-                >
-                  Grooming
-                </Checkbox>
-                <Checkbox
-                  value="Desparacitacion"
-                  onChange={(e) =>
-                    setDicServices(prevTest => ({...prevTest, desparacitacion: e.target.checked}))
-                  }
-                >
-                  Desparacitacion
-                </Checkbox>
-                <Checkbox
-                  value="Castraciones"
-                  onChange={(e) =>
-                    setDicServices(prevTest => ({...prevTest, castraciones: e.target.checked}))
-                  }
-                >
-                  Castraciones
-                </Checkbox>
-                <Checkbox
-                  value="Operacion"
-                  onChange={(e) =>
-                    setDicServices(prevTest => ({...prevTest, operacion: e.target.checked}))
-                  }
-                >
-                  Operacion
-                </Checkbox>
-              </Stack>
-            </CheckboxGroup>
-
-            <br></br>
-
-            <InputComponent
-              getter={getLatitud}
-              title="Latitud"
-              message="Ingresa el teléfono de tu veterinaria"
-            />
-
-            <InputComponent
-              getter={getLongitud}
-              title="Longitud"
-              message="Ingresa el teléfono de tu veterinaria"
-            />
-
-            <InputComponent
-              getter={getTelefono}
-              title="Teléfono"
-              message="Ingresa el teléfono de tu veterinaria"
-            />
-
-            <FormLabel>Emergencia</FormLabel>
-            <RadioGroup onChange={setEmergencia} value={emergencia}>
-              <Stack direction="row">
-                <Radio value="true">Si</Radio>
-                <Radio value="false">No</Radio>
-              </Stack>
-            </RadioGroup>
-
-            <FormControl>
-              <FormLabel>Tipo de veterinaria</FormLabel>
-              <Select focusBorderColor={'rgb(174 213 142)'}>
-                <option value="Nada">{'Cualquiera'}</option>
-                <option value="Normal">{'Normal'}</option>
-                <option value="Petshop">{'Petshop'}</option>
-                <option value="Clinica">{'Clinica'}</option>
-                <option value="Hospital">{'Hospital'}</option>
-              </Select>
-            </FormControl>
-
-            <FormLabel>Hora de apertura</FormLabel>
-            <Input
-              onChange={handleChange2}
-              title="Hora de apertura"
-              size="md"
-              type="time"
-              focusBorderColor= {'rgb(174 213 142)'}
-            />
-
-            <FormLabel>Hora de cierre</FormLabel>
-            <Input
-              onChange={handleChange}
-              title="Hora de cierre"
-              size="md"
-              type="time"
-              focusBorderColor= {'rgb(174 213 142)'}
-            />
-
-            <Button
-              backgroundColor="#ea9a64"
-              _hover="rgb(174 213 142)"
-              _active={{
-                bg: 'rgb(174 213 142)',
-                borderColor: 'rgb(174, 213, 142)',
-              }}
-              color="#fff"
-              type="submit"
-              width="100%"
-              marginTop="10px"
-            >
-              Enviar formulario
-            </Button>
-          </form>
-
-          <p className="questionCont">
-            {' '}
-            <a href="/">
+    <div>
+      <HeaderComponent className="header" />
+      <div className="provisionalBackgorund">
+        <div className="outerContainer container">
+          <div className="infoContainer">
+            <div className="titleContainer">
+              <Heading className="title">
+                Formulario para registrar una veterinaria
+              </Heading>
+            </div>
+            <form onSubmit={handleAddVet}>
+              <InputComponent
+                getter={getNombre}
+                title="Nombre"
+                message="Ingresa el nombre del veterinario"
+              />
+              <InputComponent
+                getter={getCiudad}
+                title="Ciudad"
+                message="Ingresa la ciudad de tu veterinaria"
+              />
+  
+              <InputComponent
+                getter={getZona}
+                title="Zona"
+                message="Ingresa la zona de tu veterinaria"
+              />
+  
+              <InputComponent
+                getter={getDireccion}
+                title="Dirección"
+                message="Ingresa la dirección de tu veterinaria"
+              />
+  
+              <InputComponent
+                getter={getCorreo}
+                title="Correo"
+                message="Ingresa tu correo"
+              />
+  
+              <FormLabel>Servicios ofrecidos</FormLabel>
+              <CheckboxGroup colorScheme="orange" defaultValue={['none']}>
+                <Stack spacing={[2, 3]} direction={['column']}>
+                  <Checkbox
+                    value="Vacunacion"
+                    onChange={(e) =>
+                      setDicServices(prevTest => ({...prevTest, vacunacion: e.target.checked}))
+                    }
+                  >
+                    Vacunacion
+                  </Checkbox>
+                  <Checkbox
+                    value="Rayos X"
+                    onChange={(e) =>
+                      setDicServices(prevTest => ({...prevTest, rayos_x: e.target.checked}))
+                    }
+                  >
+                    Rayos X
+                  </Checkbox>
+                  <Checkbox
+                    value="Examenes corporales"
+                    onChange={(e) =>
+                      setDicServices(prevTest => ({...prevTest, examenes_corporales: e.target.checked}))
+                    }
+                  >
+                    Examenes corporales
+                  </Checkbox>
+                  <Checkbox
+                    value="Hematologías"
+                    onChange={(e) =>
+                      setDicServices(prevTest => ({...prevTest, hematologias: e.target.checked}))
+                    }
+                  >
+                    Hematologías
+                  </Checkbox>
+                  <Checkbox
+                    value="Hospedaje"
+                    onChange={(e) =>
+                      setDicServices(prevTest => ({...prevTest, hospedaje: e.target.checked}))
+                    }
+                  >
+                    Hospedaje
+                  </Checkbox>
+                  <Checkbox
+                    value="Grooming"
+                    onChange={(e) =>
+                      setDicServices(prevTest => ({...prevTest, grooming: e.target.checked}))
+                    }
+                  >
+                    Grooming
+                  </Checkbox>
+                  <Checkbox
+                    value="Desparacitacion"
+                    onChange={(e) =>
+                      setDicServices(prevTest => ({...prevTest, desparacitacion: e.target.checked}))
+                    }
+                  >
+                    Desparacitacion
+                  </Checkbox>
+                  <Checkbox
+                    value="Castraciones"
+                    onChange={(e) =>
+                      setDicServices(prevTest => ({...prevTest, castraciones: e.target.checked}))
+                    }
+                  >
+                    Castraciones
+                  </Checkbox>
+                  <Checkbox
+                    value="Operacion"
+                    onChange={(e) =>
+                      setDicServices(prevTest => ({...prevTest, operacion: e.target.checked}))
+                    }
+                  >
+                    Operacion
+                  </Checkbox>
+                </Stack>
+              </CheckboxGroup>
+                  
+              <br></br>
+                  
+              <InputComponent
+                getter={getLatitud}
+                title="Latitud"
+                message="Ingresa el teléfono de tu veterinaria"
+              />
+  
+              <InputComponent
+                getter={getLongitud}
+                title="Longitud"
+                message="Ingresa el teléfono de tu veterinaria"
+              />
+  
+              <InputComponent
+                getter={getTelefono}
+                title="Teléfono"
+                message="Ingresa el teléfono de tu veterinaria"
+              />
+  
+              <FormLabel>Emergencia</FormLabel>
+              <RadioGroup onChange={setEmergencia} value={emergencia}>
+                <Stack direction="row">
+                  <Radio value="true">Si</Radio>
+                  <Radio value="false">No</Radio>
+                </Stack>
+              </RadioGroup>
+                  
+              <FormControl>
+                <FormLabel>Tipo de veterinaria</FormLabel>
+                <Select focusBorderColor={'rgb(174 213 142)'}>
+                  <option value="Nada">{'Cualquiera'}</option>
+                  <option value="Normal">{'Normal'}</option>
+                  <option value="Petshop">{'Petshop'}</option>
+                  <option value="Clinica">{'Clinica'}</option>
+                  <option value="Hospital">{'Hospital'}</option>
+                </Select>
+              </FormControl>
+                  
+              <FormLabel>Hora de apertura</FormLabel>
+              <Input
+                onChange={handleChange2}
+                title="Hora de apertura"
+                size="md"
+                type="time"
+                focusBorderColor= {'rgb(174 213 142)'}
+              />
+  
+              <FormLabel>Hora de cierre</FormLabel>
+              <Input
+                onChange={handleChange}
+                title="Hora de cierre"
+                size="md"
+                type="time"
+                focusBorderColor= {'rgb(174 213 142)'}
+              />
+  
+              <Button
+                backgroundColor="#ea9a64"
+                _hover="rgb(174 213 142)"
+                _active={{
+                  bg: 'rgb(174 213 142)',
+                  borderColor: 'rgb(174, 213, 142)',
+                }}
+                color="#fff"
+                type="submit"
+                width="100%"
+                marginTop="10px"
+              >
+                Enviar formulario
+              </Button>
+            </form>
+              
+            <p className="questionCont">
               {' '}
-              <b className="highlight">¿Regresar?</b>
-            </a>
-          </p>
+              <a href="/">
+                {' '}
+                <b className="highlight">¿Regresar?</b>
+              </a>
+            </p>
+          </div>
+              
+          <div className="innerContainer"></div>
         </div>
-
-        <div className="innerContainer"></div>
       </div>
     </div>
   )
