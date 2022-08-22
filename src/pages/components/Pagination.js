@@ -13,6 +13,9 @@ function Pagination({ postsPerPage, totalPosts, paginate}) {
         pagination: {
           listStyle: 'none',
           display: 'flex'
+        },
+        btn: {
+            margin: '5px'
         }
       }
 
@@ -20,7 +23,7 @@ function Pagination({ postsPerPage, totalPosts, paginate}) {
     <nav>
         <ul style={styles.pagination}>
             {pageNumbers.map(number => (
-                <Button colorScheme='teal' variant='outline' size='sm' onClick={() => paginate(number)}>
+                <Button style={styles.btn} colorScheme='teal' variant='outline' size='sm' onClick={() => paginate(number)}>
                     {number}
                 </Button>
             ))}
