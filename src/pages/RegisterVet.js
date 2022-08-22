@@ -175,7 +175,7 @@ const RegisterVet = () => {
 
             <FormLabel>Servicios ofrecidos</FormLabel>
             <CheckboxGroup colorScheme="orange" defaultValue={['none']}>
-              <Stack spacing={[1, 5]} direction={['column', 'row']}>
+              <Stack spacing={[2, 3]} direction={['column']}>
                 <Checkbox
                   value="Vacunacion"
                   onChange={(e) =>
@@ -251,6 +251,8 @@ const RegisterVet = () => {
               </Stack>
             </CheckboxGroup>
 
+            <br></br>
+
             <InputComponent
               getter={getLatitud}
               title="Latitud"
@@ -294,6 +296,7 @@ const RegisterVet = () => {
               title="Hora de apertura"
               size="md"
               type="time"
+              focusBorderColor= {'rgb(174 213 142)'}
             />
 
             <FormLabel>Hora de cierre</FormLabel>
@@ -302,6 +305,7 @@ const RegisterVet = () => {
               title="Hora de cierre"
               size="md"
               type="time"
+              focusBorderColor= {'rgb(174 213 142)'}
             />
 
             <Button
