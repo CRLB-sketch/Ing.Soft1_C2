@@ -276,6 +276,7 @@ function Search() {
                 <div>
                   <CardComponent
                     vet={vet}
+                    role="option"
                     image="https://pbs.twimg.com/media/EWH0kEZWsAAWwvI.jpg"
                     setSeePopup={setSeePopup}
                     setSelectedVet={setSelectedVet}
