@@ -1,5 +1,5 @@
 const GetVets = () => {
-  return fetch('http://localhost:5000/api/vets')
+  return fetch('http://127.0.0.1:8000/api/vets')
     .then((response) => response.json())
     .then((result) => {
       console.log(result)
