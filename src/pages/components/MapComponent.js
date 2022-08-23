@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import { Icon } from 'leaflet'
+
+import L from "leaflet";
 
 const icon = new Icon({
   iconUrl: '/icons8-marker-a-48.png',
@@ -11,7 +13,34 @@ const icon = new Icon({
 const centerPosition = [14.6050635, -90.4893286]
 
 const MapComponent = ({ vets, setSelectedVet }) => {
+  
+  const LocationMarker = () => {
+    const [position, setPosition] = useState(null)
+
+    const map = useMap()
+
+    useEffect(() => {
+      map.locate().on("locationfound", function (e) {
+        setPosition(e.latlng)
+        map.flyTo(e.latlng, map.getZoom());
+        const radius = e.accuracy;
+        const circle = L.circle(e.latlng, radius);
+        circle.addTo(map);
+      });
+    }, [map])
+    
+    return position == null ? null : (
+      <Marker position={position} icon={icon}>
+        <Popup>
+          Tu estas aquí <br />
+        </Popup>
+      </Marker>
+    )
+  }
+
   const AddVet = ({ vet }) => {
+    console.log('SEE ADD VET')
+    console.log(vet)
     const positions = [vet['long'], vet['lat']]
 
     const handle = () => {
@@ -42,6 +71,7 @@ const MapComponent = ({ vets, setSelectedVet }) => {
         {vets.map((vet) => (
           <AddVet vet={vet} />
         ))}
+        <LocationMarker/>
       </MapContainer>
     </>
   )

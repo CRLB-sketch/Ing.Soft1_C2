@@ -1,21 +1,6 @@
-/**#######################################################################################
- * Universidad del Valle de Guatemala
- * Departamento de Ciencias de la Computación
- * Ingeniería de Software 1 - Sección 10
- * 
- * Me Pet & Me
- * ! Search: Para buscar las veterinarias que el usuario solicita
- * 
- * Integrantes:
- * Cristian Laynez
- * Elean Rivas
- * Sara Paguaga
- * Diego Ruiz
- * Javier Alvarez
- #######################################################################################*/
-
 import React, { useState, useEffect } from 'react'
 import CardComponent from './components/CardComponent'
+import Pagination from './components/Pagination'
 import Popup from './Popup'
 import '../styles/search.css'
 
@@ -33,11 +18,15 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 
+import GetVets from './functions/GetVets'
+
 function Search() {
   const [posts, setPosts] = useState([])
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [selectedVet, setSelectedVet] = useState({})
   const [seePopup, setSeePopup] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage] = useState(9)
 
   const [value, setValue] = useState('')
   const handleChange = (event) => setValue(event.target.value)
@@ -45,6 +34,12 @@ function Search() {
   useEffect(() => {
     getVets()
   }, [])
+
+  const idxOfLastPost = currentPage * postsPerPage
+  const idxOfFirstPost = idxOfLastPost - postsPerPage
+  const currentPosts = posts.slice(idxOfFirstPost, idxOfLastPost)
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   const styles = {
     modalBtn: {
@@ -56,59 +51,29 @@ function Search() {
       alignItems: 'center',
       fontSize: '17px',
     },
+    pagination: {
+      listStyle: 'none'
+    }
   }
 
   const getVets = () => {
-    fetch('http://127.0.0.1:8000/start_search', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        emergency: true,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setPosts(data)
-      })
+    ;(async () => {
+        const data = await GetVets()
+        if (!data['success']) {
+          alert(data['error'])
+        } else {
+          console.log(data)
+          setPosts(data['data'])
+        }
+    })()
   }
 
   const filterVet = () => {
-    fetch('http://127.0.0.1:8000/name_filter', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        search_vet: value,
-      }),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        console.log('VERIFICAR: ' + result.data)
-        setPosts(result.data)
-      })
+    alert("FILTER VET :)")
   }
 
   const updateData = (the_emergency, the_vet, selected_service, the_time) => {
-    fetch('http://127.0.0.1:8000/apply_changues', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        emergency: the_emergency,
-        vet_type: the_vet,
-        selected_service: selected_service,
-        time: the_time,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('VERIFICAR: ' + data)
-        setPosts(data)
-      })
+    alert("UPDATE DATA")
   }
 
   class FilterFrom extends React.Component {
@@ -274,7 +239,7 @@ function Search() {
           </div>
 
           <div className="CardsContainer">
-            {posts.map((vet) => {
+            {currentPosts.map((vet) => {
               return (
                 <div>
                   <CardComponent
@@ -287,6 +252,7 @@ function Search() {
               )
             })}
           </div>
+          <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} />
         </div>
       </div>
     )
@@ -319,7 +285,7 @@ function Search() {
               &#x1F50D;{' '}
             </Button>
           </div>
-        </>
+        </> 
       )}
       {!seePopup && <SeeSearch />}
       {seePopup && <Popup vet={selectedVet} regretOriginal={setSeePopup} />}
