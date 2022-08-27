@@ -59,8 +59,9 @@
 
    const dragStart = (e) => {
     setDiffX(e.screenX - e.currentTarget.getBoundingClientRect().left)
-    setDiffX(e.screenY - e.currentTarget.getBoundingClientRect().top)  
+    setDiffY(e.screenY - e.currentTarget.getBoundingClientRect().top)  
     setDragging(true)
+    //console.log('click')
    }
 
    const dragFun = (e) => {
@@ -74,6 +75,7 @@
 
    const dragEnd = (e) => {
     setDragging(false)
+    //console.log('up')
    }
  
    const SeeMaps = () => {
