@@ -35,8 +35,8 @@
    const [diffX, setDiffX] = useState(0)
    const [diffY, setDiffY] = useState(0)
    const [dragging, setDragging] = useState(false)
-   const [leftStyle, setLeftStyle] = useState(0)
-   const [topStyle, setTopStyle] = useState(0)
+   const [leftStyle, setLeftStyle] = useState(50)
+   const [topStyle, setTopStyle] = useState(130)
 
    const styles = {
     dispInfo: {
@@ -61,6 +61,8 @@
     setDiffX(e.screenX - e.currentTarget.getBoundingClientRect().left)
     setDiffY(e.screenY - e.currentTarget.getBoundingClientRect().top)  
     setDragging(true)
+
+    e.preventDefault();
     //console.log('click')
    }
 
@@ -70,10 +72,14 @@
       var topSty = e.screenY - diffY
       setTopStyle(topSty)
       setLeftStyle(leftSty)
+
+      e.preventDefault();
+      console.log('dragging')
+
     }
    }
 
-   const dragEnd = (e) => {
+   const dragEnd = () => {
     setDragging(false)
     //console.log('up')
    }
