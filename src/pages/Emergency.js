@@ -32,6 +32,18 @@
    })
    const [loaded, setLoaded] = useState(false)
    const [seePopup, setSeePopup] = useState(false)
+   const [diffX, setDiffX] = useState(0)
+   const [diffY, setDiffY] = useState(0)
+   const [dragging, setDragging] = useState(false)
+   const [leftStyle, setLeftStyle] = useState(0)
+   const [topStyle, setTopStyle] = useState(0)
+
+   const styles = {
+    dispInfo: {
+      left: leftStyle,
+      top: topStyle
+    }
+  }
  
    React.useEffect(() => {
      ;(async () => {
@@ -44,6 +56,25 @@
        }
      })()
    }, [])
+
+   const dragStart = (e) => {
+    setDiffX(e.screenX - e.currentTarget.getBoundingClientRect().left)
+    setDiffX(e.screenY - e.currentTarget.getBoundingClientRect().top)  
+    setDragging(true)
+   }
+
+   const dragFun = (e) => {
+    if(dragging){
+      var leftSty = e.screenX - diffX
+      var topSty = e.screenY - diffY
+      setTopStyle(topSty)
+      setLeftStyle(leftSty)
+    }
+   }
+
+   const dragEnd = (e) => {
+    setDragging(false)
+   }
  
    const SeeMaps = () => {
      return (
@@ -61,7 +92,7 @@
            ></meta>
  
            {selectedVet['name'] !== 'N/A' && (
-             <div class="displayInfo">
+             <div class="displayInfo" style={styles.dispInfo} onMouseDown={dragStart} onMouseMove={dragFun} onMouseUp={dragEnd}>
                <h2>Emergencia</h2>
                <div class="vetInfo">
                  <h4>Veterinaria: {selectedVet['name']}</h4>
