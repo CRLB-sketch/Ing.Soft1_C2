@@ -132,9 +132,10 @@ h3 {
 }
 
 .displayInfo {
-  /* height: 100%; */
+  background-color: white;
   width: 20vmax;
-  /* background-color: #ea9a64; */
+  position: absolute;
+  z-index: 10000;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 15px;
   border-width: 10px;

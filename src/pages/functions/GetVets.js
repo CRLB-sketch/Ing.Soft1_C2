@@ -1,8 +1,8 @@
 const GetVets = () => {
-  return fetch('http://localhost:8000/api/vets')
+  return fetch('http://localhost:5000/api/vets')
     .then((response) => response.json())
     .then((result) => {
-      console.log(result)
+      //console.log(result)
       if (result.success) {
         return { data: result.data, success: true }
       } else {
