@@ -14,14 +14,12 @@
  * Javier Alvarez
  #######################################################################################*/
 
- import React, { useState } from 'react'
+ import React, { useState, useEffect } from 'react'
 
  import '../styles/map.css'
  
  import MapComponent from './components/MapComponent'
- import Popup from './Popup'
- 
- import GetVets from './functions/GetVets'
+ import Popup from './Popup' 
  
  const Emergency = () => {
    const [vets, setVets] = useState([])
@@ -30,20 +28,27 @@
      direction: 'N/A',
      phone: 'N/A',
    })
-   const [loaded, setLoaded] = useState(false)
+
    const [seePopup, setSeePopup] = useState(false)
+   
  
-   React.useEffect(() => {
-     ;(async () => {
-       const data = await GetVets()
-       if (!data['success']) {
-         alert(data['error'])
-       } else {
-         setVets(data['data'])
-         setLoaded(true)
-       }
-     })()
-   }, [])
+
+
+  const [vetsData, setVetsData] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const fetchVets = async () => {
+      setLoading(true)
+      const res = await fetch('http://localhost:5000/api/vets')
+      const {data} = await res.json() 
+      setVetsData(data)
+      setLoading(false)
+    }
+    fetchVets()
+    // console.log(vetsData)
+  }, [])
+
  
    const SeeMaps = () => {
      return (
@@ -54,24 +59,9 @@
          />
          <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
          <>
-           <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-           <meta
-             name="viewport"
-             content="width=device-width, initial-scale=1.0"
-           ></meta>
  
            {selectedVet['name'] !== 'N/A' && (
-             <div class="displayInfo">
-               <h2>Emergencia</h2>
-               <div class="vetInfo">
-                 <h4>Veterinaria: {selectedVet['name']}</h4>
-                 <h4>Dirección: {selectedVet['direction']['city']}</h4>
-                 <h4>Número de teléfono: {selectedVet['phone']}</h4>
-               </div>
-               <button class="emBtn" onClick={() => setSeePopup(true)}>
-                 Ver Más Detalles
-               </button>
-             </div>
+             <div>ll</div>
            )}
  
            <div
@@ -86,10 +76,7 @@
                    : 'map-container-ext'
                }
              >
-               {!loaded && <h1>Cargando...</h1>}
-               {loaded && (
-                 <MapComponent vets={vets} setSelectedVet={setSelectedVet} />
-               )}
+               {!loading ? <MapComponent vetsData={vetsData} /> : <h1>Cargando ...</h1>}
              </div>
            </div>
          </>

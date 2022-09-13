@@ -1,65 +1,32 @@
-import React, { useEffect, useState } from "react";
-
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import { Icon } from 'leaflet'
+import InfoBox from './InfoBox'
+import '../../styles/map.css'
 
-import L from "leaflet";
+import {useState, useEffect} from 'react'
+
 
 const icon = new Icon({
   iconUrl: '/icons8-marker-a-48.png',
   iconSize: [48, 48],
 })
 
+
+
 const centerPosition = [14.6050635, -90.4893286]
 
-const MapComponent = ({ vets, setSelectedVet }) => {
-  
-  const LocationMarker = () => {
-    const [position, setPosition] = useState(null)
+//vets, setSelectedVet
 
-    const map = useMap()
+const Map = ({vetsData}) => {
+  const [displayInfo, setDisplayInfo] = useState(null)
 
-    useEffect(() => {
-      map.locate().on("locationfound", function (e) {
-        setPosition(e.latlng)
-        map.flyTo(e.latlng, map.getZoom());
-        const radius = e.accuracy;
-        const circle = L.circle(e.latlng, radius);
-        circle.addTo(map);
-      });
-    }, [map])
-    
-    return position == null ? null : (
-      <Marker position={position} icon={icon}>
-        <Popup>
-          Tu estas aquí <br />
-        </Popup>
-      </Marker>
-    )
-  }
+  const markers = vetsData.map(el => {
+    return <div className='paguaga' onClick={() => setDisplayInfo({name: el.name, 
+                                              city: el.direction.city, 
+                                              phone: el.phone})}>
+           <Marker position={[el.long, el.lat]} icon={icon} />
+           </div> })
 
-  const AddVet = ({ vet }) => {
-    console.log('SEE ADD VET')
-    console.log(vet)
-    const positions = [vet['long'], vet['lat']]
-
-    const handle = () => {
-      setSelectedVet(vet)
-    }
-
-    return (
-      <div onClick={handle}>
-        <Marker position={positions} icon={icon}>
-          <Popup>
-            {vet['name']} <br />{' '}
-            <button onClick={handle} className="btn-marker">
-              VER MAS
-            </button>
-          </Popup>
-        </Marker>
-      </div>
-    )
-  }
 
   return (
     <>
@@ -68,13 +35,13 @@ const MapComponent = ({ vets, setSelectedVet }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {vets.map((vet) => (
-          <AddVet vet={vet} />
-        ))}
-        <LocationMarker/>
+        {markers}
       </MapContainer>
+      {displayInfo && <InfoBox info={displayInfo}/>}
+      
     </>
   )
 }
 
-export default MapComponent
+
+export default Map
