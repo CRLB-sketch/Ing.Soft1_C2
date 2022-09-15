@@ -19,7 +19,7 @@
  import '../styles/map.css'
  
  import MapComponent from './components/MapComponent'
- import Popup from './Popup'
+ import Popup from './VetPopup'
  
  import GetVets from './functions/GetVets'
  

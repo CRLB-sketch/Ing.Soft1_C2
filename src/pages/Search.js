@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import CardComponent from './components/CardComponent'
 import Pagination from './components/Pagination'
-import Popup from './Popup'
+import Popup from './VetPopup'
 import '../styles/search.css'
 
 import {

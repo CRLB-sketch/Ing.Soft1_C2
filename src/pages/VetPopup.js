@@ -20,7 +20,7 @@
  import { Skeleton } from '@chakra-ui/react'
  import { Divider } from '@chakra-ui/react'
  
- function Popup({ vet, regretOriginal }) {
+ const VetPopup = ({ vet, regretOriginal }) => {
    return (
      <div>
        <button onClick={() => regretOriginal(false)}>REGRESAR</button>
@@ -111,5 +111,5 @@
    )
  }
  
- export default Popup
+ export default VetPopup
  

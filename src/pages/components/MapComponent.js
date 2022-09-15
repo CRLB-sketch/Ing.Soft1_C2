@@ -1,19 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
-import { Icon } from 'leaflet'
+import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvent } from 'react-leaflet'
+import { Icon, map } from 'leaflet'
 
 import L from "leaflet";
 
-const icon = new Icon({
+const iconVet = new Icon({
   iconUrl: '/icons8-marker-a-48.png',
+  shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
   iconSize: [48, 48],
 })
 
+const iconHouse = new Icon({
+  iconSize: [25, 41],
+  iconAnchor: [10, 41],
+  popupAnchor: [2, -40],
+  iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",    
+})
+
+
 const centerPosition = [14.6050635, -90.4893286]
 
-const MapComponent = ({ vets, setSelectedVet }) => {
-  
+const MapComponent = ({ vets, setSelectedVet }) => {  
   const LocationMarker = () => {
     const [position, setPosition] = useState(null)
 
@@ -30,7 +39,7 @@ const MapComponent = ({ vets, setSelectedVet }) => {
     }, [map])
     
     return position == null ? null : (
-      <Marker position={position} icon={icon}>
+      <Marker position={position} icon={iconHouse}>
         <Popup>
           Tu estas aquí <br />
         </Popup>
@@ -39,17 +48,23 @@ const MapComponent = ({ vets, setSelectedVet }) => {
   }
 
   const AddVet = ({ vet }) => {
-    console.log('SEE ADD VET')
-    console.log(vet)
+    // console.log('SEE ADD VET')
+    // console.log(vet)
     const positions = [vet['long'], vet['lat']]
-
+    
+    const mapRef = useRef()
     const handle = () => {
       setSelectedVet(vet)
+      const {current = {} } = mapRef;
+      const { leafletElement: map } = current;
+
+      map.setCenter(positions)
+      return null
     }
 
     return (
       <div onClick={handle}>
-        <Marker position={positions} icon={icon}>
+        <Marker position={positions} icon={iconVet}>
           <Popup>
             {vet['name']} <br />{' '}
             <button onClick={handle} className="btn-marker">
