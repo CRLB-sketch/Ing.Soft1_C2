@@ -6,8 +6,8 @@ import '../styles/register.css'
 let user_type = 'vet'
 
 const Register = () => {
-    const [nombre, setNombre] = useState('')
-    const [apellido, setApellido] = useState('')
+    // const [nombre, setNombre] = useState('')
+    // const [apellido, setApellido] = useState('')
     const [user, setUser] = useState('')
     const [correo, setCorreo] = useState('')
     const [contra1, setContra1] = useState('')
@@ -48,13 +48,13 @@ const Register = () => {
         }
     }
 
-    const getNombre = (name) => {
-        setNombre(name)
-    }
+    // const getNombre = (name) => {
+    //     setNombre(name)
+    // }
 
-    const getApellido = (apellido) => {
-        setApellido(apellido)
-    }
+    // const getApellido = (apellido) => {
+    //     setApellido(apellido)
+    // }
     const getUser = (user) => {
         setUser(user)
     }
@@ -77,12 +77,12 @@ const Register = () => {
                     </div>
                     <form onSubmit={handleSubmit}>
                         <InputComponent
-                            getter={getNombre}
+                            // getter={getNombre}
                             title="Nombre"
                             message="Ingresa tu nombre"
                         />
                         <InputComponent
-                            getter={getApellido}
+                            // getter={getApellido}
                             title="Apellidos"
                             message="Ingresa tus apellidos"
                         />

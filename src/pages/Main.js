@@ -22,38 +22,32 @@ function Main() {
     return (
         <div>
             <HeaderComponent className="header" />
-            <div >
-
-            <div className="textCont">
-                
-
-                <div class="text">
-                    <h2>
-                        <b>My Pet & Me</b>
-                    </h2>
-                    <h3>
-                        {' '}
-                        <b>
-                            Brindandote tranquilidad a ti y bienestar a tu
-                            mascota.
-                        </b>
-                    </h3>
-                    <p>
-                        <b className="description">
-                        <br/>
-                            Brindamos información acerca de veterinarias y los
-                            doctores que atienden en ellas, para que puedas
-                            llevar a tu mascota en caso de emergencia o atención
-                            médica.
-                        </b>
-                    </p>
+            <div>
+                <div className="textCont">
+                    <div className="text">
+                        <h2>
+                            <b>My Pet & Me</b>
+                        </h2>
+                        <h3>
+                            {' '}
+                            <b>
+                                Brindandote tranquilidad a ti y bienestar a tu
+                                mascota.
+                            </b>
+                        </h3>
+                        <p>
+                            <b className="description">
+                                <br />
+                                Brindamos información acerca de veterinarias y
+                                los doctores que atienden en ellas, para que
+                                puedas llevar a tu mascota en caso de emergencia
+                                o atención médica.
+                            </b>
+                        </p>
+                    </div>
                 </div>
-                
+                <div className="overlay"></div>
             </div>
-            <div className='overlay'></div>
-
-            </div>
-            
         </div>
     )
 }

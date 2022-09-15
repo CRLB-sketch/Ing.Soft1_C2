@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 /**#######################################################################################
  * Universidad del Valle de Guatemala
  * Departamento de Ciencias de la Computación
@@ -15,9 +16,11 @@
  #######################################################################################*/
 
 // import '../styles/index.css'
-import { Link, useNavigate } from 'react-router-dom'
+// import PropTypes from 'prop-types'
 
-function HeaderComponent({ setCurrentPage }) {
+import { Link } from 'react-router-dom'
+
+const HeaderComponent = () => {
     return (
         <>
             <nav className="header">

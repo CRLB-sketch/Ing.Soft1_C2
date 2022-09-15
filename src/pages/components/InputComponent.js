@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import { Input, FormLabel } from '@chakra-ui/react'
 import '../../styles/register.css'
 
@@ -27,6 +29,12 @@ const InputComponent = ({ getter, title, message }) => {
             />
         </div>
     )
+}
+
+InputComponent.propTypes = {
+    getter: PropTypes.func,
+    title: PropTypes.string,
+    message: PropTypes.string,
 }
 
 export default InputComponent
