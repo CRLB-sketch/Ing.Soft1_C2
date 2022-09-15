@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from 'react-router-dom';
 
 import Main from "./pages/Main";
-import Emergency from "./pages/Emergency";
+// import Emergency from "./pages/Emergency";
 import Login from "./pages/Login";
 import Popup from "./pages/VetPopup";
 import Search from "./pages/Search";
@@ -10,7 +10,6 @@ import Register from "./pages/Register";
 import RegisterVet from "./pages/RegisterVet"
 import FAQ from "./pages/FAQ"
 import HeaderComponent from "./pages/components/HeaderComponent";
-
 import MapVet from './pages/MapVet'
 
 function App() {
