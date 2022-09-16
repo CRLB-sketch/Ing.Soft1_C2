@@ -6,7 +6,7 @@
 */
 import { render, screen } from '@testing-library/react'
 import React from 'react'
-import Search from './Search'
+import Search from '../Search'
 
 describe('Search app component testings', () => {
 

@@ -1,9 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import { Select } from '@chakra-ui/react'
 import '../../styles/search.css'
 
 const OptionComponent = ({
-    fun,
     title,
     message,
     opcion1,
@@ -32,6 +33,15 @@ const OptionComponent = ({
             </Select>
         </div>
     )
+}
+
+OptionComponent.propTypes = {
+    title: PropTypes.string,
+    message: PropTypes.string,
+    opcion1: PropTypes.string,
+    opcion2: PropTypes.string,
+    opcion3: PropTypes.string,
+    opcion4: PropTypes.string,
 }
 
 export default OptionComponent

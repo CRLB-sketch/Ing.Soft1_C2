@@ -1,23 +1,13 @@
-/**#######################################################################################
- * Universidad del Valle de Guatemala
- * Departamento de Ciencias de la Computación
- * Ingeniería de Software 1 & 2 - Sección 10
- * 
- * Me Pet & Me
- * ! Map Vet: Mostrar mapa y solicitar que se atienda a la mascota
- * 
- * Integrantes:
- * Cristian Laynez
- * Elean Rivas
- * Sara Paguaga
- * Diego Ruiz 
- * Javier Alvarez
- #######################################################################################*/
-
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { MapContainer, Marker, TileLayer, Tooltip, useMap } from 'react-leaflet'
+import { 
+    MapContainer, 
+    Marker, 
+    TileLayer, 
+    Tooltip, 
+    useMap 
+} from 'react-leaflet'
 import { Icon } from 'leaflet'
 import L from 'leaflet'
 
@@ -79,13 +69,6 @@ const MapVet = () => {
     const [seeInfo, setSeeInfo] = useState(null)
     const [seePopup, setSeePopup] = useState(false)
 
-    // Para el Componente Dragabble
-    //     const [diffX, setDiffX] = useState(0)
-    //     const [diffY, setDiffY] = useState(0)
-    //     const [dragging, setDragging] = useState(false)
-    //     const [leftStyle, setLeftStyle] = useState(60)
-    //    const [topStyle, setTopStyle] = useState(100)
-
     const styles = {
         dispInfo: {
             left: 60,
@@ -103,31 +86,6 @@ const MapVet = () => {
             }
         })()
     }, [])
-
-    // const dragStart = (e) => {
-    //     setDiffX(e.screenX - e.currentTarget.getBoundingClientRect().left)
-    //     setDiffY(e.screenY - e.currentTarget.getBoundingClientRect().top)
-    //     setDragging(true)
-
-    //     e.preventDefault();
-    // }
-
-    // const dragFun = (e) => {
-    //     if(dragging){
-    //         var leftSty = e.screenX - diffX
-    //         var topSty = e.screenY - diffY
-    //         setTopStyle(topSty)
-    //         setLeftStyle(leftSty)
-
-    //         e.preventDefault();
-    //         console.log('dragging')
-
-    //     }
-    // }
-
-    // const dragEnd = () => {
-    //     setDragging(false)
-    // }
 
     const AddVet = ({ lat, long, vet }) => {
         const map = useMap()
@@ -154,12 +112,9 @@ const MapVet = () => {
         return (
             <>
                 {seeInfo !== null && (
-                    <div
+                    <div                        
                         className="displayInfo"
                         style={styles.dispInfo}
-                        // onMouseDown={dragStart}
-                        // onMouseMove={dragFun}
-                        // onMouseUp={dragEnd}
                     >
                         <h2>Información</h2>
                         <div className="vetInfo">
@@ -182,12 +137,12 @@ const MapVet = () => {
     }
 
     return (
-        <>
+        <div>
             {seePopup && (
                 <VetPopup vet={seeInfo} regretOriginal={setSeePopup} />
             )}
             {!seePopup && (
-                <>
+                <div>
                     <SeeVetInfo />
                     <MapContainer center={centerPosition} zoom={13}>
                         <TileLayer
@@ -197,7 +152,7 @@ const MapVet = () => {
                         <LocationMarker />
                         {vets !== null &&
                             vets.map((vet) => (
-                                <AddVet
+                                <AddVet                                    
                                     key={vet['id']}
                                     lat={vet['long']}
                                     long={vet['lat']}
@@ -205,9 +160,9 @@ const MapVet = () => {
                                 />
                             ))}
                     </MapContainer>
-                </>
+                </div>
             )}
-        </>
+        </div>
     )
 }
 
