@@ -2,7 +2,7 @@
  * Universidad del Valle de Guatemala
  * Departamento de Ciencias de la Computación
  * Ingeniería de Software 2 - Sección 10
- * 
+ *  
  * Me Pet & Me
  * ! FAQ
  * 
