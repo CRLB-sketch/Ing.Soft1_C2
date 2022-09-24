@@ -37,7 +37,8 @@ function Search() {
 
     const idxOfLastPost = currentPage * postsPerPage
     const idxOfFirstPost = idxOfLastPost - postsPerPage
-    const currentPosts = (posts !== null) ? posts.slice(idxOfFirstPost, idxOfLastPost) : null
+    const currentPosts =
+        posts !== null ? posts.slice(idxOfFirstPost, idxOfLastPost) : null
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
@@ -257,26 +258,27 @@ function Search() {
                     </div>
 
                     <div className="CardsContainer">
-                        {currentPosts !== null && currentPosts.map((vet) => {
-                            return (
-                                <div key={vet['id']}>
-                                    <CardComponent          
-                                        vet={vet}                              
-                                        image="https://pbs.twimg.com/media/EWH0kEZWsAAWwvI.jpg"
-                                        setSeePopup={setSeePopup}
-                                        setSelectedVet={setSelectedVet}
-                                    />
-                                </div>
-                            )
-                        })}
+                        {currentPosts !== null &&
+                            currentPosts.map((vet) => {
+                                return (
+                                    <div key={vet['id']}>
+                                        <CardComponent
+                                            vet={vet}
+                                            image="https://pbs.twimg.com/media/EWH0kEZWsAAWwvI.jpg"
+                                            setSeePopup={setSeePopup}
+                                            setSelectedVet={setSelectedVet}
+                                        />
+                                    </div>
+                                )
+                            })}
                     </div>
-                    {posts !== null && 
-                    <Pagination
-                        postsPerPage={postsPerPage}
-                        totalPosts={posts.length}
-                        paginate={paginate}
-                    />
-                    }
+                    {posts !== null && (
+                        <Pagination
+                            postsPerPage={postsPerPage}
+                            totalPosts={posts.length}
+                            paginate={paginate}
+                        />
+                    )}
                 </div>
             </div>
         )

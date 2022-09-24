@@ -32,8 +32,8 @@
         "eject": "react-scripts eject",
         "server": "node backend/server.js",
         "db": "nodemon backend/server.js",
-        "lint-all": "eslint src/pages/**",
-        "lint-all-fix": "eslint src/pages/** --fix"
+        "lint": "eslint src/pages/**",
+        "lint-fix": "eslint src/pages/** --fix"
     },
     "eslintConfig": {
         "extends": [

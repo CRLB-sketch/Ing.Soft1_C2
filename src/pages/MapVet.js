@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { 
-    MapContainer, 
-    Marker, 
-    TileLayer, 
-    Tooltip, 
-    useMap 
-} from 'react-leaflet'
+import { MapContainer, Marker, TileLayer, Tooltip, useMap } from 'react-leaflet'
 import { Icon } from 'leaflet'
 import L from 'leaflet'
 
@@ -112,10 +106,7 @@ const MapVet = () => {
         return (
             <>
                 {seeInfo !== null && (
-                    <div                        
-                        className="displayInfo"
-                        style={styles.dispInfo}
-                    >
+                    <div className="displayInfo" style={styles.dispInfo}>
                         <h2>Información</h2>
                         <div className="vetInfo">
                             <h4>
@@ -152,7 +143,7 @@ const MapVet = () => {
                         <LocationMarker />
                         {vets !== null &&
                             vets.map((vet) => (
-                                <AddVet                                    
+                                <AddVet
                                     key={vet['id']}
                                     lat={vet['long']}
                                     long={vet['lat']}

@@ -13,7 +13,7 @@
  * Diego Ruiz
  * Javier Alvarez
  #######################################################################################*/
-
+ 
 import React from 'react'
 import '../styles/landingPage.css'
 import HeaderComponent from './components/HeaderComponent'

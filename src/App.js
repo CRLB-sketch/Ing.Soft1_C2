@@ -11,7 +11,7 @@ import FAQ from './pages/FAQ'
 import HeaderComponent from './pages/components/HeaderComponent'
 import MapVet from './pages/MapVet'
 
-function App() {
+function App() { 
       
     // -> Por si no se selecciono una de las páginas anteriores ---------------------------
     return (    
