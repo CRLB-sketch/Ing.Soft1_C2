@@ -8,9 +8,16 @@ const Vet = require('../models/vetModel')
 // @route   GET /api/vets
 // @access  Public
 const getVets = asyncHandler(async (req, res) => {
-    console.log('VETS')
     const vets = await Vet.find({ verified: true })
     res.status(200).json({ success: true, data: vets })
+})
+
+// @desc    Get user vet info
+// @route   GET /api/vets/vetdata
+// @access  Public
+const getVetData = asyncHandler(async (req, res) => {
+    const vets = await Vet.find({ user: req.user.id})
+    res.status(200).json(vets)
 })
 
 // @desc    Get vets info (Only Vet Verified)
@@ -57,9 +64,9 @@ const vetsFilter = asyncHandler(async (req, res) => {
 // @desc    Set vet info
 // @route   POST /api/vets
 // @access  Private
+// PERSONAL
 const setVetinfo = asyncHandler(async (req, res) => {
-    console.log('SET VET INFO')
-    console.log(req.body.name)
+    
     if (!req.body.name) {
         res.status(400)
         throw new Error('Please add a text field')
@@ -67,6 +74,7 @@ const setVetinfo = asyncHandler(async (req, res) => {
 
     const vet = await Vet.create({
         name: req.body.name,
+        user: req.user.id,
         direction: req.body.direction,
         email: req.body.email,
         services: req.body.services,
@@ -119,6 +127,7 @@ const deleteVetinfo = asyncHandler(async (req, res) => {
 module.exports = {
     getVets,
     getAllVets,
+    getVetData,
     vetsFilter,
     setVetinfo,
     updateVetinfo,
