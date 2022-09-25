@@ -1,12 +1,13 @@
+/* eslint-disable no-undef */
 const express = require('express')
 const router = express.Router()
 const {
-  getVets,
-  getAllVets,
-  setVetinfo,
-  updateVetinfo,
-  deleteVetinfo,
-  vetsFilter,
+    getVets,
+    getAllVets,
+    setVetinfo,
+    updateVetinfo,
+    deleteVetinfo,
+    vetsFilter,
 } = require('../controllers/vetController')
 
 router.get('/', getVets)
