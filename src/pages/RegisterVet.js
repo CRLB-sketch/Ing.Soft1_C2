@@ -17,6 +17,13 @@ import '../styles/form.css'
 
 import HeaderComponent from './components/HeaderComponent'
 
+// Librerias para usar el Mapa
+import { MapContainer, TileLayer, useMapEvents, Marker } from 'react-leaflet'
+// import CurrentLocation from './components/CurrentLocation'
+// import {  MapContainer, TileLayer, useMapEvents, Marker, Popup } from 'react-leaflet'
+// import { useEffect } from 'react'
+// import L from 'leaflet'
+
 const RegisterVet = () => {
     const [nombre, setNombre] = useState('')
     const [ciudad, setCiudad] = useState('')
@@ -24,13 +31,24 @@ const RegisterVet = () => {
     const [direccion, setDireccion] = useState('')
     const [correo, setCorreo] = useState('')
     const [dicServices, setDicServices] = useState({})
-    const [latitud, setLatitud] = useState('')
-    const [longitud, setLongitud] = useState('')
     const [telefono, setTelefono] = useState('')
     const [emergencia, setEmergencia] = useState('')
-    // const [tipo, setTipo] = useState('')
     const [apertura, setApertura] = useState('')
     const [cierre, setCierre] = useState('')
+    const [position, setPosition] = useState(null)
+
+    const LocateMarker = () => {
+        // Métodos para obtener la ubicacion
+        const map = useMapEvents({
+            click(e) {
+                map.locate()
+                setPosition(e.latlng)
+                map.flyTo(e.latlng, map.getZoom())
+            },
+        })
+
+        return position === null ? null : <Marker position={position}></Marker>
+    }
 
     const handleAddVet = (event) => {
         event.preventDefault()
@@ -47,7 +65,11 @@ const RegisterVet = () => {
             return
         }
 
-        fetch('http://127.0.0.1:8000/api/vets', {
+        if (position === null) {
+            alert('No has seleccionado una posicion/ubicacion en el mapa')
+        }
+
+        fetch('http://localhost:5000/api/vets', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,23 +79,20 @@ const RegisterVet = () => {
                 direction: { city: ciudad, zone: zona, address: direccion },
                 email: correo,
                 services: services,
-                lat: latitud,
-                long: longitud,
+                lat: position.lat,
+                long: position.lng,
                 phone: telefono,
                 emergency: emergencia,
-                vet_type: '',
-                // vet_type: tipo,
                 open_time: apertura,
                 close_time: cierre,
-                verified: false,
             }),
         })
             .then((response) => response.json())
             .then((result) => {
                 if (result.success === true) {
-                    alert('Se agrego el user')
+                    alert('Se agrego la nueva vet exitosamente')
                 } else {
-                    alert('Error con la solicitud')
+                    alert(result.message)
                 }
             })
             .catch((error) => {
@@ -104,33 +123,9 @@ const RegisterVet = () => {
         setCorreo(correo)
     }
 
-    const getLatitud = (latitud) => {
-        setLatitud(latitud)
-    }
-
-    const getLongitud = (longitud) => {
-        setLongitud(longitud)
-    }
-
     const getTelefono = (telefono) => {
         setTelefono(telefono)
     }
-
-    // const getEmergencia = (emergencia) => {
-    //     setEmergencia(emergencia)
-    // }
-
-    // const getTipo = (tipo) => {
-    //     setTipo(tipo)
-    // }
-
-    // const getApertura = (apertura) => {
-    //     setApertura(apertura)
-    // }
-
-    // const getCierre = (cierre) => {
-    //     setCierre(cierre)
-    // }
 
     const handleChange = (event) => setCierre(event.target.value)
     const handleChange2 = (event) => setApertura(event.target.value)
@@ -287,20 +282,28 @@ const RegisterVet = () => {
                             </CheckboxGroup>
 
                             <br></br>
+                            <h1>
+                                Ingresa la ubicacion donde se encuentra la
+                                veterinaria
+                            </h1>
+                            <br></br>
 
-                            <InputComponent
-                                getter={getLatitud}
-                                title="Latitud"
-                                type="number"
-                                message="Ingresa el teléfono de tu veterinaria"
-                            />
+                            <MapContainer
+                                center={[14.6050635, -90.4893286]}
+                                zoom={13}
+                            >
+                                <TileLayer
+                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                />
+                                <LocateMarker />
+                            </MapContainer>
 
-                            <InputComponent
-                                getter={getLongitud}
-                                title="Longitud"
-                                type="double"
-                                message="Ingresa el teléfono de tu veterinaria"
-                            />
+                            {position !== null && (
+                                <p>
+                                    Lat: {position.lat}, Long: {position.lng}{' '}
+                                </p>
+                            )}
 
                             <InputComponent
                                 getter={getTelefono}

@@ -1,3 +1,11 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+/* eslint-disable react/jsx-filename-extension */
+/**
+ * @jest-enviroment jsdom
+ */
+
 const express = require('express')
 const colors = require('colors')
 const dotenv = require('dotenv').config()
