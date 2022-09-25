@@ -9,9 +9,11 @@ const {
     deleteVetinfo,
     vetsFilter,
 } = require('../controllers/vetController')
+const { protect } = require('../middleware/authMiddleware')
+
 
 router.get('/', getVets)
-router.post('/', setVetinfo)
+router.post('/', protect, setVetinfo)
 router.put('/:id', updateVetinfo)
 router.delete('/:id', deleteVetinfo)
 
