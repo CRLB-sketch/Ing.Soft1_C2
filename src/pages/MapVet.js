@@ -145,8 +145,8 @@ const MapVet = () => {
                             vets.map((vet) => (
                                 <AddVet
                                     key={vet['id']}
-                                    lat={vet['long']}
-                                    long={vet['lat']}
+                                    lat={vet['lat']}
+                                    long={vet['long']}
                                     vet={vet}
                                 />
                             ))}
