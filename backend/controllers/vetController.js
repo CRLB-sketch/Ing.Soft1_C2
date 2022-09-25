@@ -85,7 +85,6 @@ const deleteVetinfo = asyncHandler(async (req, res) => {
 module.exports = {
     getVets,
     getAllVets,
-    vetsFilter,
     setVetinfo,
     updateVetinfo,
     deleteVetinfo,
