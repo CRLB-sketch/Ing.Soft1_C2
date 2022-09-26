@@ -63,12 +63,7 @@ const MapVet = () => {
     const [seeInfo, setSeeInfo] = useState(null)
     const [seePopup, setSeePopup] = useState(false)
 
-    const styles = {
-        dispInfo: {
-            left: 60,
-            top: 100,
-        },
-    }
+
 
     React.useEffect(() => {
         (async () => {
@@ -106,7 +101,7 @@ const MapVet = () => {
         return (
             <>
                 {seeInfo !== null && (
-                    <div className="displayInfo" style={styles.dispInfo}>
+                    <div className="displayInfo" >
                         <h2>Información</h2>
                         <div className="vetInfo">
                             <h4>
