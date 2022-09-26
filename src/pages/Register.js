@@ -70,7 +70,7 @@ const Register = () => {
 
     return (
         <div className="provisionalBackgorund">
-            <div className="outerContainer container">
+            <div className="faqCont container">
                 <div className="infoContainer">
                     <div className="titleContainer">
                         <Heading className="title">Registro</Heading>

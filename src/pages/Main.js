@@ -10,10 +10,10 @@
  * Cristian Laynez
  * Elean Rivas
  * Sara Paguaga
- * Diego Ruiz
+ * Diego Ruiz 
  * Javier Alvarez
  #######################################################################################*/
- 
+
 import React from 'react'
 import '../styles/landingPage.css'
 import HeaderComponent from './components/HeaderComponent'

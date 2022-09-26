@@ -73,6 +73,15 @@
     
 }
 
+.faqCont {
+    background-color: var(--blanco);
+    border-radius: 30px;
+    height: 90%;
+    overflow-y: scroll;
+    padding: 30px;
+    width: 90%;
+}
+
 @media (max-width: 870px) {
     .outerContainer{
         max-width: 500px;

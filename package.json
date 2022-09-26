@@ -29,11 +29,14 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
+        "jest": "jest src/pages/__tests__/search.test.js",
+        "mocha": "mocha src/pages/__tests__/mocha",
         "eject": "react-scripts eject",
         "server": "node backend/server.js",
         "db": "nodemon backend/server.js",
         "lint": "eslint src/pages/**",
-        "lint-fix": "eslint src/pages/** --fix"
+        "lint-fix": "eslint src/pages/** --fix",
+        "lint-e": "eslint src/index.js --fix"
     },
     "eslintConfig": {
         "extends": [
@@ -60,7 +63,11 @@
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.3.0",
         "babel-loader": "^8.2.5",
+        "jest": "^27.5.1",
         "nodemon": "^2.0.19",
         "webpack": "^5.74.0"
+    },
+    "jest": {
+        "testEnvironment": "node"
     }
 }
