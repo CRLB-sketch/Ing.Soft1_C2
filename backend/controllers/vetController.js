@@ -2,9 +2,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-filename-extension */
-/**
- * @jest-enviroment jsdom
- */
+/* @jest-enviroment jsdom */
+
 const asyncHandler = require('express-async-handler')
 
 const Vet = require('../models/vetModel')
@@ -18,45 +17,13 @@ const getVets = asyncHandler(async (req, res) => {
     res.status(200).json({ success: true, data: vets })
 })
 
-// @desc    Get vets info (Only Vet Verified)
+// @desc    Get vets info (All The Vets Verified & No Verified)
 // @route   GET /api/vets
 // @access  Public
 const getAllVets = asyncHandler(async (req, res) => {
     console.log('ALL VETS')
     const vets = await Vet.find()
     res.status(200).json({ success: true, data: vets })
-})
-
-// @desc    Get Vets by Filter
-// @route   POST /api/vets/apply_changues
-// @access  Private
-const vetsFilter = asyncHandler(async (req, res) => {
-    const selected = req.body.selected_service
-    const emergency = req.body.emergency
-    const vet_type = req.body.vet_type
-    const time = req.body.time
-    console.log(
-        'VETS FILTER:\n' +
-            selected +
-            '\n' +
-            emergency +
-            '\n' +
-            vet_type +
-            '\n' +
-            time +
-            '\n'
-    )
-
-    // Ver si se selecciono un servicio en específico (Rayos X, Hospedaje, etc o cualquiera)
-
-    // Ver si es tipo emergencia o no (o cualquiera de los dos)
-
-    // Ver que tipo de vet es (Normal, Petshop, Clinica, Hospital o Cualquiera)
-
-    // Ver si el tiempo esta en el rango solicitado
-
-    const vets = await Vet.find()
-    res.status(200).json(vets)
 })
 
 // @desc    Set vet info
@@ -110,11 +77,6 @@ const setVetinfo = asyncHandler(async (req, res) => {
         const info = information.map((i) => i + '\n')
         throw new Error('Faltaron los siguientes campos a llenar: \n' + info)
     }
-
-    // if (!req.body.name) {
-    //     res.status(400)
-    //     throw new Error('Please add a text field')
-    // }
 
     const vet = await Vet.create({
         name: req.body.name,
