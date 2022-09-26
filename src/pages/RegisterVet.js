@@ -16,10 +16,17 @@ import {
     FormLabel,
 } from '@chakra-ui/react'
 import '../styles/form.css'
+import {useEffect} from 'react'
+import {useNavigate} from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // import HeaderComponent from './components/HeaderComponent'
 
-const RegisterVet = () => {
+function RegisterVet () {
+
+    const navigate = useNavigate()
+    const {user} = useSelector((state) => state.auth)
+
     const [nombre, setNombre] = useState('')
     const [ciudad, setCiudad] = useState('')
     const [zona, setZona] = useState('')
@@ -33,6 +40,12 @@ const RegisterVet = () => {
     // const [tipo, setTipo] = useState('')
     const [apertura, setApertura] = useState('')
     const [cierre, setCierre] = useState('')
+
+    useEffect(() => {
+        if(!user){
+            navigate('/login')
+        }
+    }, [user, navigate])
 
     const handleAddVet = (event) => {
         event.preventDefault()
@@ -117,22 +130,6 @@ const RegisterVet = () => {
     const getTelefono = (telefono) => {
         setTelefono(telefono)
     }
-
-    // const getEmergencia = (emergencia) => {
-    //     setEmergencia(emergencia)
-    // }
-
-    // const getTipo = (tipo) => {
-    //     setTipo(tipo)
-    // }
-
-    // const getApertura = (apertura) => {
-    //     setApertura(apertura)
-    // }
-
-    // const getCierre = (cierre) => {
-    //     setCierre(cierre)
-    // }
 
     const handleChange = (event) => setCierre(event.target.value)
     const handleChange2 = (event) => setApertura(event.target.value)
