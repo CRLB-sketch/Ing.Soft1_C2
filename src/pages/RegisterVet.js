@@ -1,7 +1,6 @@
 /* eslint-disable linebreak-style */
 
 import React, { useState } from 'react'
-import InputComponent from './components/InputComponent'
 import {
     Heading,
     Button,
@@ -18,9 +17,9 @@ import {
 import '../styles/form.css'
 import {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import {createVet } from '../features/vets/vetsSlice'
 
-// import HeaderComponent from './components/HeaderComponent'
 
 function RegisterVet () {
 
@@ -37,9 +36,13 @@ function RegisterVet () {
     const [longitud, setLongitud] = useState('')
     const [telefono, setTelefono] = useState('')
     const [emergencia, setEmergencia] = useState('')
-    // const [tipo, setTipo] = useState('')
     const [apertura, setApertura] = useState('')
     const [cierre, setCierre] = useState('')
+
+    const colors = {
+        verde: 'rgb(174 213 142)',
+    }
+
 
     useEffect(() => {
         if(!user){
@@ -47,91 +50,34 @@ function RegisterVet () {
         }
     }, [user, navigate])
 
-    const handleAddVet = (event) => {
-        event.preventDefault()
-        const services = []
-        for (const [key, value] of Object.entries(dicServices)) {
-            console.log(key + ' -+- ' + value)
-            if (value === true) {
-                services.push(key)
-            }
-        }
+    const dispatch = useDispatch()
 
-        if (services.length === 0) {
-            alert('Porfavor ingrese como mínimo un servicio')
-            return
-        }
+    const handleAddVet = (e) => {
+        e.preventDefault()
+        dispatch(createVet({nombre, 
+            ciudad, 
+            zona, 
+            direccion, 
+            correo, 
+            dicServices, 
+            latitud, 
+            longitud,
+            emergencia,
+            apertura,
+            cierre }))
 
-        fetch('http://127.0.0.1:8000/api/vets', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: nombre,
-                direction: { city: ciudad, zone: zona, address: direccion },
-                email: correo,
-                services: services,
-                lat: latitud,
-                long: longitud,
-                phone: telefono,
-                emergency: emergencia,
-                vet_type: '',
-                open_time: apertura,
-                close_time: cierre,
-                verified: false,
-            }),
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                if (result.success === true) {
-                    alert('Se agrego el user')
-                } else {
-                    alert('Error con la solicitud')
-                }
-            })
-            .catch((error) => {
-                alert('Ocurrio un error inesperado: ' + error)
-            })
-            .then(() => {
-                window.location.href = '/'
-            })
+        setCiudad('')
+        setZona('')
+        setDireccion('')
+        setCorreo('')
+        setDicServices({})
+        setLatitud('')
+        setLongitud('')
+        setTelefono('')
+        setEmergencia('')
+        setApertura('')
+        setCierre('')
     }
-
-    const getNombre = (name) => {
-        setNombre(name)
-    }
-
-    const getCiudad = (ciudad) => {
-        setCiudad(ciudad)
-    }
-
-    const getZona = (zona) => {
-        setZona(zona)
-    }
-
-    const getDireccion = (address) => {
-        setDireccion(address)
-    }
-
-    const getCorreo = (correo) => {
-        setCorreo(correo)
-    }
-
-    const getLatitud = (latitud) => {
-        setLatitud(latitud)
-    }
-
-    const getLongitud = (longitud) => {
-        setLongitud(longitud)
-    }
-
-    const getTelefono = (telefono) => {
-        setTelefono(telefono)
-    }
-
-    const handleChange = (event) => setCierre(event.target.value)
-    const handleChange2 = (event) => setApertura(event.target.value)
 
     return (
         <div>
@@ -144,34 +90,66 @@ function RegisterVet () {
                             </Heading>
                         </div>
                         <form onSubmit={handleAddVet}>
-                            <InputComponent
-                                getter={getNombre}
-                                title="Nombre"
-                                message="Ingresa el nombre del veterinario"
-                            />
-                            <InputComponent
-                                getter={getCiudad}
-                                title="Ciudad"
-                                message="Ingresa la ciudad de tu veterinaria"
-                            />
 
-                            <InputComponent
-                                getter={getZona}
-                                title="Zona"
-                                message="Ingresa la zona de tu veterinaria"
-                            />
+                            <div className="outerContainer2">
+                                <FormLabel>{'Nombre'}</FormLabel>
+                                <Input
+                                    type='text'
+                                    value={nombre}
+                                    name='nombre'
+                                    onChange={(e) => setNombre(e.target.value)}
+                                    focusBorderColor={colors.verde}
+                                    placeholder={'Ingrese el nombre del veterinario'}
+                                />
+                            </div>
 
-                            <InputComponent
-                                getter={getDireccion}
-                                title="Dirección"
-                                message="Ingresa la dirección de tu veterinaria"
-                            />
+                            <div className="outerContainer2">
+                                <FormLabel>{'Ciudad'}</FormLabel>
+                                <Input
+                                    type='text'
+                                    value={ciudad}
+                                    name='ciudad'
+                                    onChange={(e) => setCiudad(e.target.value)}
+                                    focusBorderColor={colors.verde}
+                                    placeholder={'Ingrese la ciudad de la veterinaria'}
+                                />
+                            </div>
 
-                            <InputComponent
-                                getter={getCorreo}
-                                title="Correo"
-                                message="Ingresa tu correo"
-                            />
+                            <div className="outerContainer2">
+                                <FormLabel>{'Zona'}</FormLabel>
+                                <Input
+                                    type='text'
+                                    value={zona}
+                                    name='ciudad'
+                                    onChange={(e) => setZona(e.target.value)}
+                                    focusBorderColor={colors.verde}
+                                    placeholder={'Ingrese la zona de la veterinaria'}
+                                />
+                            </div>                            
+
+                            <div className="outerContainer2">
+                                <FormLabel>{'Dirección'}</FormLabel>
+                                <Input
+                                    type='text'
+                                    value={direccion}
+                                    name='direccion'
+                                    onChange={(e) => setDireccion(e.target.value)}
+                                    focusBorderColor={colors.verde}
+                                    placeholder={'Ingrese la direccion de la veterinaria'}
+                                />
+                            </div>
+
+                            <div className="outerContainer2">
+                                <FormLabel>{'Correo'}</FormLabel>
+                                <Input
+                                    type='text'
+                                    value={correo}
+                                    name='correo'
+                                    onChange={(e) => setCorreo(e.target.value)}
+                                    focusBorderColor={colors.verde}
+                                    placeholder={'Ingrese el correo de la veterinaria'}
+                                />
+                            </div>
 
                             <FormLabel>Servicios ofrecidos</FormLabel>
                             <CheckboxGroup
@@ -285,25 +263,41 @@ function RegisterVet () {
 
                             <br></br>
 
-                            <InputComponent
-                                getter={getLatitud}
-                                title="Latitud"
-                                type="number"
-                                message="Ingresa el teléfono de tu veterinaria"
-                            />
+                            <div className="outerContainer2">
+                                <FormLabel>{'Latitud'}</FormLabel>
+                                <Input
+                                    type='number'
+                                    value={latitud}
+                                    name='latitud'
+                                    onChange={(e) => setLatitud(e.target.value)}
+                                    focusBorderColor={colors.verde}
+                                    placeholder={'Ingrese la latitud de la ubicación de la veterinaria'}
+                                />
+                            </div>
 
-                            <InputComponent
-                                getter={getLongitud}
-                                title="Longitud"
-                                type="double"
-                                message="Ingresa el teléfono de tu veterinaria"
-                            />
+                            <div className="outerContainer2">
+                                <FormLabel>{'Longitud'}</FormLabel>
+                                <Input
+                                    type='number'
+                                    value={longitud}
+                                    name='longitud'
+                                    onChange={(e) => setLongitud(e.target.value)}
+                                    focusBorderColor={colors.verde}
+                                    placeholder={'Ingrese la longitud de la ubicación de la veterinaria'}
+                                />
+                            </div>
 
-                            <InputComponent
-                                getter={getTelefono}
-                                title="Teléfono"
-                                message="Ingresa el teléfono de tu veterinaria"
-                            />
+                            <div className="outerContainer2">
+                                <FormLabel>{'Teléfono'}</FormLabel>
+                                <Input
+                                    type='text'
+                                    value={telefono}
+                                    name='telefono'
+                                    onChange={(e) => setTelefono(e.target.value)}
+                                    focusBorderColor={colors.verde}
+                                    placeholder={'Ingrese el teléfono de la veterinaria'}
+                                />
+                            </div>
 
                             <FormLabel>Emergencia</FormLabel>
                             <RadioGroup
@@ -331,19 +325,23 @@ function RegisterVet () {
 
                             <FormLabel>Hora de apertura</FormLabel>
                             <Input
-                                onChange={handleChange2}
                                 title="Hora de apertura"
                                 size="md"
                                 type="time"
+                                name="apertura"
+                                value={apertura}
+                                onChange={(event) => setApertura(event.target.value)}
                                 focusBorderColor={'rgb(174 213 142)'}
                             />
 
                             <FormLabel>Hora de cierre</FormLabel>
                             <Input
-                                onChange={handleChange}
+                                value={cierre}
+                                onChange={(event) => setCierre(event.target.value)}
                                 title="Hora de cierre"
                                 size="md"
                                 type="time"
+                                name="cierre"
                                 focusBorderColor={'rgb(174 213 142)'}
                             />
 
@@ -374,7 +372,6 @@ function RegisterVet () {
 
                     <div className="innerContainer"></div>
                 </div>
-                {/* </div> */}
             </div>
         </div>
     )

@@ -23,13 +23,7 @@ const Register = () => {
     const {user, isError, isSuccess, message} = useSelector((state) => state.auth)
 
     const colors = {
-        fondo: 'rgb(223 225 225)',
         verde: 'rgb(174 213 142)',
-        white: 'rgb(181 142 213)',
-        naranja: 'rgb(37, 150, 190)',
-        verde2: '#97db75',
-        verde3: '#ace291',
-        verde4: '#b6e69e',
     }
 
     useEffect(() => {
