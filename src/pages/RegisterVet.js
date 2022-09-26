@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react'
 import '../styles/form.css'
 
-import HeaderComponent from './components/HeaderComponent'
+// import HeaderComponent from './components/HeaderComponent'
 
 const RegisterVet = () => {
     const [nombre, setNombre] = useState('')
@@ -139,7 +139,7 @@ const RegisterVet = () => {
 
     return (
         <div>
-            <HeaderComponent className="header" />
+            {/* <HeaderComponent className="header" /> */}
             <div className="provisionalBackgorund">
                 <div className="outerContainer container">
                     <div className="infoContainer">
@@ -379,6 +379,7 @@ const RegisterVet = () => {
 
                     <div className="innerContainer"></div>
                 </div>
+                {/* </div> */}
             </div>
         </div>
     )

@@ -38,7 +38,7 @@ const Login = () => {
         }
 
         if(isSuccess || user){
-            navigate('/')
+            navigate('/RegisterVet')
         }
 
         dispatch(reset())

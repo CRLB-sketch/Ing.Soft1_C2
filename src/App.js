@@ -25,7 +25,7 @@ function App() {
                 <Route path='/login' element={<> <Login/>  </>}></Route>
                 <Route path='/register' element={<>  <Register/>  </>}></Route>
                 <Route path='/Popup' element={<>  <Popup/>  </>}></Route>
-                <Route path='/RegisterVet' element={<>  <RegisterVet/>  </>}></Route>
+                <Route path='/RegisterVet' element={<> <HeaderComponent/> <RegisterVet/>  </>}></Route>
                 <Route path='/faq' element={<>  <HeaderComponent/>  <FAQ/> </>}></Route> 
             </Routes>
             <ToastContainer />
