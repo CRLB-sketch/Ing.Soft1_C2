@@ -20,6 +20,7 @@ import '../styles/register.css'
 
 const FAQ = () => {
     return (
+        
         <div className="provisionalBackgorund">
             <div className="faqCont container">
                 <div className="titleContainer">
@@ -111,6 +112,7 @@ const FAQ = () => {
                 </div>
             </div>
         </div>
+        
     )
 }
 

@@ -53,51 +53,54 @@ const Login = () => {
     }
 
     return (
-        <div>        
-            <HeaderComponent className="header" />
-            <div className="provisionalBackgorund">
-                <div className="faqCont container">
-                    <div className="infoContainer">
-                        <div className="titleContainer">
-                            <Heading className="title">Iniciar Sesión</Heading>
-                        </div>
-                        <form onSubmit={handleSubmit}>
-                            <InputComponent
-                                getter={getCorreo}
-                                title="Correo"
-                                message="Ingresa tu correo"
-                            />
-                            <InputComponent
-                                getter={getContra}
-                                title="Contraseña"
-                                message="Ingresa tu contraseña"
-                            />
-                            <Button
-                                backgroundColor="#ea9a64"
-                                _hover="rgb(174 213 142)"
-                                _active={{
-                                    bg: 'rgb(174 213 142)',
-                                    borderColor: 'rgb(174, 213, 142)',
-                                }}
-                                color="#fff"
-                                type="submit"
-                                width="100%"
-                                marginTop="10px"
-                            >
+        <div data-testid={'login-test'}>
+            <div>        
+                <HeaderComponent className="header" />
+                <div className="provisionalBackgorund">
+                    <div className="faqCont container">
+                        <div className="infoContainer">
+                            <div className="titleContainer">
+                                <Heading className="title">Iniciar Sesión</Heading>
+                            </div>
+                            <form onSubmit={handleSubmit}>
+                                <InputComponent
+                                    getter={getCorreo}
+                                    title="Correo"
+                                    message="Ingresa tu correo"
+                                />
+                                <InputComponent
+                                    getter={getContra}
+                                    title="Contraseña"
+                                    message="Ingresa tu contraseña"
+                                />
+                                <Button
+                                    backgroundColor="#ea9a64"
+                                    _hover="rgb(174 213 142)"
+                                    _active={{
+                                        bg: 'rgb(174 213 142)',
+                                        borderColor: 'rgb(174, 213, 142)',
+                                    }}
+                                    color="#fff"
+                                    type="submit"
+                                    width="100%"
+                                    marginTop="10px"
+                                >
                                 Aceptar
-                            </Button>
-                        </form>
-                        <p className="questionCont">
+                                </Button>
+                            </form>
+                            <p className="questionCont">
                             ¿No tienes cuenta?{' '}
-                            <a href="/register">
-                                <b className="highlight">¡Registrate!</b>
-                            </a>
-                        </p>
+                                <a href="/register">
+                                    <b className="highlight">¡Registrate!</b>
+                                </a>
+                            </p>
+                        </div>
+                        <div className="innerContainer"></div>
                     </div>
-                    <div className="innerContainer"></div>
                 </div>
             </div>
         </div>
+        
     )
 }
 
