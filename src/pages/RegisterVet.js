@@ -77,7 +77,6 @@ function RegisterVet () {
                 phone: telefono,
                 emergency: emergencia,
                 vet_type: '',
-                // vet_type: tipo,
                 open_time: apertura,
                 close_time: cierre,
                 verified: false,
@@ -136,7 +135,6 @@ function RegisterVet () {
 
     return (
         <div>
-            {/* <HeaderComponent className="header" /> */}
             <div className="provisionalBackgorund">
                 <div className="outerContainer container">
                     <div className="infoContainer">
