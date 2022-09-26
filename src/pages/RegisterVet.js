@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react'
 import '../styles/form.css'
 
+
 import HeaderComponent from './components/HeaderComponent'
 
 // Librerias para usar el Mapa
@@ -23,6 +24,8 @@ import { MapContainer, TileLayer, useMapEvents, Marker } from 'react-leaflet'
 // import {  MapContainer, TileLayer, useMapEvents, Marker, Popup } from 'react-leaflet'
 // import { useEffect } from 'react'
 // import L from 'leaflet'
+
+
 
 const RegisterVet = () => {
     const [nombre, setNombre] = useState('')
@@ -51,56 +54,69 @@ const RegisterVet = () => {
     }
 
     const handleAddVet = (event) => {
+
         event.preventDefault()
-        const services = []
-        for (const [key, value] of Object.entries(dicServices)) {
-            console.log(key + ' -+- ' + value)
-            if (value === true) {
-                services.push(key)
-            }
-        }
 
-        if (services.length === 0) {
-            alert('Porfavor ingrese como mínimo un servicio')
-            return
-        }
+        if (isNaN(telefono) && isNaN(zona))
+        {
+            alert('Debe ingresar solo numeros en telefono y zona.')
+        }else{
 
-        if (position === null) {
-            alert('No has seleccionado una posicion/ubicacion en el mapa')
-        }
-
-        fetch('http://localhost:5000/api/vets', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: nombre,
-                direction: { city: ciudad, zone: zona, address: direccion },
-                email: correo,
-                services: services,
-                lat: position.lat,
-                long: position.lng,
-                phone: telefono,
-                emergency: emergencia,
-                open_time: apertura,
-                close_time: cierre,
-            }),
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                if (result.success === true) {
-                    alert('Se agrego la nueva vet exitosamente')
-                } else {
-                    alert(result.message)
+            const services = []
+            for (const [key, value] of Object.entries(dicServices)) {
+                console.log(key + ' -+- ' + value)
+                if (value === true) {
+                    services.push(key)
                 }
+            }
+
+            if (services.length === 0) {
+                alert('Porfavor ingrese como mínimo un servicio')
+                return
+            }
+
+            if (position === null) {
+                alert('No has seleccionado una posicion/ubicacion en el mapa')
+            }
+
+            fetch('http://localhost:5000/api/vets', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: nombre,
+                    direction: { city: ciudad, zone: zona, address: direccion },
+                    email: correo,
+                    services: services,
+                    lat: position.lat,
+                    long: position.lng,
+                    phone: telefono,
+                    emergency: emergencia,
+                    open_time: apertura,
+                    close_time: cierre,
+                }),
             })
-            .catch((error) => {
-                alert('Ocurrio un error inesperado: ' + error)
-            })
-            .then(() => {
-                window.location.href = '/'
-            })
+                .then((response) => response.json())
+                .then((result) => {
+                    if (result.success === true) {
+                        alert('Se agrego la nueva vet exitosamente')
+                    } else {
+                        alert(result.message)
+                    }
+                })
+                .catch((error) => {
+                    alert('Ocurrio un error inesperado: ' + error)
+                })
+                .then(() => {
+                    window.location.href = '/'
+                })
+            
+        }
+
+        
+
+        
     }
 
     const getNombre = (name) => {
@@ -170,7 +186,7 @@ const RegisterVet = () => {
                                 title="Correo"
                                 message="Ingresa tu correo"
                             />
-
+                            
                             <FormLabel>Servicios ofrecidos</FormLabel>
                             <CheckboxGroup
                                 colorScheme="orange"
@@ -280,6 +296,7 @@ const RegisterVet = () => {
                                     </Checkbox>
                                 </Stack>
                             </CheckboxGroup>
+                            
 
                             <br></br>
                             <h1>
@@ -287,7 +304,7 @@ const RegisterVet = () => {
                                 veterinaria
                             </h1>
                             <br></br>
-
+                                                   
                             <MapContainer
                                 center={[14.6050635, -90.4893286]}
                                 zoom={13}
@@ -298,7 +315,7 @@ const RegisterVet = () => {
                                 />
                                 <LocateMarker />
                             </MapContainer>
-
+                            
                             {position !== null && (
                                 <p>
                                     Lat: {position.lat}, Long: {position.lng}{' '}
@@ -308,21 +325,22 @@ const RegisterVet = () => {
                             <InputComponent
                                 getter={getTelefono}
                                 title="Teléfono"
-                                message="Ingresa el teléfono de tu veterinaria"
+                                message="12345678"
                             />
+                            <FormControl isRequired> 
+                                <FormLabel>Emergencia</FormLabel>
+                                <RadioGroup
+                                    onChange={setEmergencia}
+                                    value={emergencia}
+                                >
+                                    <Stack direction="row">
+                                        <Radio value="true">Si</Radio>
+                                        <Radio value="false">No</Radio>
+                                    </Stack>
+                                </RadioGroup>
+                            </FormControl>
 
-                            <FormLabel>Emergencia</FormLabel>
-                            <RadioGroup
-                                onChange={setEmergencia}
-                                value={emergencia}
-                            >
-                                <Stack direction="row">
-                                    <Radio value="true">Si</Radio>
-                                    <Radio value="false">No</Radio>
-                                </Stack>
-                            </RadioGroup>
-
-                            <FormControl>
+                            <FormControl isRequired>
                                 <FormLabel>Tipo de veterinaria</FormLabel>
                                 <Select focusBorderColor={'rgb(174 213 142)'}>
                                     <option value="Nada">{'Cualquiera'}</option>
@@ -334,25 +352,26 @@ const RegisterVet = () => {
                                     </option>
                                 </Select>
                             </FormControl>
-
-                            <FormLabel>Hora de apertura</FormLabel>
-                            <Input
-                                onChange={handleChange2}
-                                title="Hora de apertura"
-                                size="md"
-                                type="time"
-                                focusBorderColor={'rgb(174 213 142)'}
-                            />
-
-                            <FormLabel>Hora de cierre</FormLabel>
-                            <Input
-                                onChange={handleChange}
-                                title="Hora de cierre"
-                                size="md"
-                                type="time"
-                                focusBorderColor={'rgb(174 213 142)'}
-                            />
-
+                            <FormControl isRequired> 
+                                <FormLabel>Hora de apertura</FormLabel>
+                                <Input
+                                    onChange={handleChange2}
+                                    title="Hora de apertura"
+                                    size="md"
+                                    type="time"
+                                    focusBorderColor={'rgb(174 213 142)'}
+                                />
+                            </FormControl>
+                            <FormControl isRequired> 
+                                <FormLabel>Hora de cierre</FormLabel>
+                                <Input
+                                    onChange={handleChange}
+                                    title="Hora de cierre"
+                                    size="md"
+                                    type="time"
+                                    focusBorderColor={'rgb(174 213 142)'}
+                                />
+                            </FormControl>
                             <Button
                                 backgroundColor="#ea9a64"
                                 _hover="rgb(174 213 142)"

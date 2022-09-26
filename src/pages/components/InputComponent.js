@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Input, FormLabel } from '@chakra-ui/react'
+import { Input, FormLabel, FormControl } from '@chakra-ui/react'
 import '../../styles/register.css'
 
 const InputComponent = ({ getter, title, message }) => {
@@ -21,12 +21,15 @@ const InputComponent = ({ getter, title, message }) => {
 
     return (
         <div className="outerContainer2">
-            <FormLabel>{title}</FormLabel>
-            <Input
-                onChange={handleChange}
-                focusBorderColor={colors.verde}
-                placeholder={message}
-            />
+            <FormControl isRequired>
+                <FormLabel>{title}</FormLabel>
+                <Input
+                    onChange={handleChange}
+                    focusBorderColor={colors.verde}
+                    placeholder={message}
+                    isRequired = {true}
+                />
+            </FormControl>
         </div>
     )
 }
