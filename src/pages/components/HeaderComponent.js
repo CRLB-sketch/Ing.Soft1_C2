@@ -18,6 +18,8 @@
 // import '../styles/index.css'
 // import PropTypes from 'prop-types'
 
+/* eslint-disable linebreak-style */
+
 import { Link } from 'react-router-dom'
 
 const HeaderComponent = () => {

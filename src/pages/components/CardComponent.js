@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+/* eslint-disable linebreak-style */
 import { Image, Stack } from '@chakra-ui/react'
 import '../../styles/search.css'
 

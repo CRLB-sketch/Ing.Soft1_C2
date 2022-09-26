@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
+/* eslint-disable linebreak-style */
 const express = require('express')
 const colors = require('colors')
 const dotenv = require('dotenv').config()

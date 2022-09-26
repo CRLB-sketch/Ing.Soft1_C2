@@ -13,7 +13,8 @@
  * Diego Ruiz
  * Javier Alvarez
  #######################################################################################*/
- 
+
+/* eslint-disable linebreak-style */
 import React from 'react'
 import '../styles/landingPage.css'
 import HeaderComponent from './components/HeaderComponent'

@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+
 import React, { useState, useEffect } from 'react'
 import CardComponent from './components/CardComponent'
 import Pagination from './components/Pagination'

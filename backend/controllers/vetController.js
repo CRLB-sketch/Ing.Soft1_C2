@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
+/* eslint-disable linebreak-style */
 const asyncHandler = require('express-async-handler')
 
 const Vet = require('../models/vetModel')

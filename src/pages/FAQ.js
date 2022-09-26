@@ -14,6 +14,7 @@
  * Javier Alvarez
  #######################################################################################*/
 
+/* eslint-disable linebreak-style */
 import React from 'react'
 import { Heading } from '@chakra-ui/react'
 import '../styles/register.css'

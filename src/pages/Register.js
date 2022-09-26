@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import React, { useState } from 'react'
 import InputComponent from './components/InputComponent'
 import { Heading, Button } from '@chakra-ui/react'

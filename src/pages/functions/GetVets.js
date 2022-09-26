@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+
 const GetVets = () => {
     return fetch('http://localhost:5000/api/vets')
         .then((response) => response.json())
