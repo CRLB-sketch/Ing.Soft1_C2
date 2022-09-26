@@ -1,6 +1,10 @@
 /* eslint-disable linebreak-style */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Input, FormLabel } from '@chakra-ui/react'
+import {useSelector, useDispatch} from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import {toast} from 'react-toastify'
+import {register, reset} from '../features/auth/authSlice'
 import { Heading, Button } from '@chakra-ui/react'
 import '../styles/register.css'
 import HeaderComponent from './components/HeaderComponent'
@@ -14,6 +18,9 @@ const Register = () => {
     })
 
     const {name, email, password, password2} = formData
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const {user, isError, isSuccess, message} = useSelector((state) => state.auth)
 
     const colors = {
         fondo: 'rgb(223 225 225)',
@@ -25,6 +32,19 @@ const Register = () => {
         verde4: '#b6e69e',
     }
 
+    useEffect(() => {
+        if(isError){
+            toast.error(message)
+        }
+
+        if(isSuccess || user){
+            navigate('/form')
+        }
+
+        dispatch(reset())
+
+    }, [user, isError, isSuccess, message, navigate, dispatch])
+
     const handleChange = (e) => {
         setFormData((prevState) => ({
             ...prevState, 
@@ -34,6 +54,17 @@ const Register = () => {
 
     const onSubmit = (e) => {
         e.preventDefault()
+
+        if (password !== password2) {
+            toast.error('Las contraseñas no son iguales')
+        } else {
+            const userData = {
+                name,
+                email,
+                password,
+            }
+            dispatch(register(userData))
+        }
     }
     
     return (
@@ -43,7 +74,7 @@ const Register = () => {
                 <div className="outerContainer container">
                     <div className="infoContainer">
                         <div className="titleContainer">
-                            <Heading className="title">Iniciar Sesión</Heading>
+                            <Heading className="title">Crea una cuenta</Heading>
                         </div>
                         <form onSubmit={onSubmit}>
 
@@ -112,7 +143,7 @@ const Register = () => {
                         </form>
                         <p className="questionCont">
                             ¿No tienes cuenta?{' '}
-                            <a href="./Login>">
+                            <a href="./Login">
                                 <b className="highlight">¡Registrate!</b>
                             </a>
                         </p>
