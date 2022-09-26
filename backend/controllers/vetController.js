@@ -12,6 +12,15 @@ const getVets = asyncHandler(async (req, res) => {
     res.status(200).json({ success: true, data: vets })
 })
 
+// @desc    Get vet's vets info (Only Vet Verified)
+// @route   GET /api/vets/vetdata
+// @access  Public
+const getVetData = asyncHandler(async (req, res) => {
+    const vets = await Vet.find({ verified: true, user: req.user.id})
+    res.status(200).json({ success: true, data: vets })
+})
+
+
 // @desc    Get vets info (Only Vet Verified)
 // @route   GET /api/vets
 // @access  Public
@@ -84,6 +93,7 @@ const deleteVetinfo = asyncHandler(async (req, res) => {
 
 module.exports = {
     getVets,
+    getVetData,
     getAllVets,
     setVetinfo,
     updateVetinfo,

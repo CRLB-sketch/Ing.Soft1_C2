@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 const {
     getVets,
+    getVetData,
     getAllVets,
     setVetinfo,
     updateVetinfo,
@@ -12,6 +13,7 @@ const { protect } = require('../middleware/authMiddleware')
 
 
 router.get('/', getVets)
+router.get('/vetdata', protect, getVetData)
 router.post('/', protect, setVetinfo)
 router.put('/:id', updateVetinfo)
 router.delete('/:id', deleteVetinfo)
